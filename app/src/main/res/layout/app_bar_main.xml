@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?><!--<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    android:gravity = "center_vertical"
+    android:padding = "10dp"
+    android:weightSum = "1">
+    <LinearLayout
+        android:layout_width = "0dp"
+        android:layout_height = "match_parent"
+        android:layout_weight = "0.6">
+        <ImageView
+            android:layout_width = "wrap_content"
+            android:layout_height = "match_parent"
+            android:src = "@drawable/ic_menu_slideshow" />
+        <TextView
+            android:id = "@+id/name"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginLeft = "10dp"
+            android:text = "Instagram"
+            android:textSize = "20sp"
+            android:textColor = "#000"
+            android:textStyle = "bold"
+            app:fontFamily = "" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width = "0dp"
+        android:layout_height = "match_parent"
+        android:layout_marginRight = "10dp"
+        android:layout_weight = "0.4"
+        android:gravity = "end">
+        <ImageView
+            android:layout_width = "wrap_content"
+            android:layout_height = "match_parent"
+            android:src = "@drawable/ic_menu_camera" />
+        <ImageView
+            android:layout_width = "wrap_content"
+            android:layout_height = "match_parent"
+            android:layout_marginLeft = "20dp"
+            android:src = "@drawable/ic_menu_send" />
+    </LinearLayout>
+</LinearLayout>-->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="nyuci.in"
+            fontPath="font/Dosis-SemiBold.ttf"
+            tools:ignore="MissingPrefix"
+            android:textSize="24sp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryApps" />
+    </RelativeLayout>
+
+
+    <include layout="@layout/content_main" />
+
+</RelativeLayout>
