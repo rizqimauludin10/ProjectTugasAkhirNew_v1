@@ -2,9 +2,11 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#3F4247</color>
     <color name="colorPrimaryApps">#3263FE</color>
-    <color name="text">#424056</color>
-    <color name="tittleApps">#3F4247</color>
+    <color name="text">#979797</color>
+    <color name="username">#3F4247</color>
+    <color name="tittleApps">#13476A</color>
     <color name="background">#FFFFFF</color>
+    <color name="backgroundmain">#F2F2F2</color>
 </resources>

@@ -6,12 +6,55 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
+    android:background="@color/backgroundmain"
     android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_gravity="center"/>
+        android:layout_marginTop="55dp"
+        android:orientation="vertical"
+        android:background="@color/background"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hai,"
+            android:textSize="20sp"
+            android:textColor="#606163"
+            fontPath="font/TitilliumWeb-Bold.ttf"
+            tools:ignore="MissingPrefix"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mau cari Laundry dimana ? "
+            android:textSize="22sp"
+            android:textColor="#606163"
+            fontPath="font/TitilliumWeb-Bold.ttf"
+            tools:ignore="MissingPrefix"
+            />
+        
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:text="Masukkan nama tempat atau lokasi"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:textColor="#B8B8B8"
+                android:background="@drawable/edittext_style"
+                fontPath="font/TitilliumWeb-Light.ttf"
+                tools:ignore="MissingPrefix"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
