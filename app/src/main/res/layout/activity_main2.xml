@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/backgroundmain"
-    tools:context=".Search">
+    tools:context=".Main2Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,31 +17,55 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
             <EditText
                 android:layout_gravity="center"
                 android:id="@+id/search_activity_search"
+                android:focusable="false"
                 android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edittext_style_2"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_style"
                 android:paddingLeft="45dp"
-                android:hint="Masukkan alamat atau nama tempat"
+                android:hint=""
                 android:textColor="#787878"
                 android:textSize="14sp"
                 fontPath="font/TitilliumWeb-Regular.ttf"
                 tools:ignore="MissingPrefix" />
 
             <ImageView
-                android:id="@+id/search1"
-                android:layout_width="18dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="37dp"
-                android:src="@drawable/search2" />
+                android:src="@drawable/back_button" />
 
         </FrameLayout>
 
     </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/iconApps"
+        app:tabTextColor="@color/text"
+        app:tabTextAppearance="@style/MyCustomTabText"
+        app:tabSelectedTextColor="@color/iconApps">
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewpager_id"
+
+        >
+
+    </androidx.viewpager.widget.ViewPager>
+
 
 </LinearLayout>
