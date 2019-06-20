@@ -25,8 +25,9 @@
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:background="@drawable/edittext_style_2"
-                android:paddingLeft="45dp"
+                android:paddingStart="45dp"
                 android:hint="Masukkan alamat atau nama tempat"
+                android:inputType="text"
                 android:textColor="#787878"
                 android:textSize="14sp"
                 fontPath="font/TitilliumWeb-Regular.ttf"
@@ -34,11 +35,12 @@
 
             <ImageView
                 android:id="@+id/search1"
-                android:layout_width="18dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="37dp"
-                android:src="@drawable/search2" />
+                android:layout_marginStart="35dp"
+                android:contentDescription="Search"
+                android:src="@drawable/search" />
 
         </FrameLayout>
 
