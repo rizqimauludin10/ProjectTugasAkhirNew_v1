@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,21 +8,157 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp">
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="20dp">
 
         <TextView
+            android:id="@+id/selamatdatang"
+            fontPath="font/TitilliumWeb-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Selamat Datang!"
             android:textColor="#3F4247"
             android:textSize="28sp"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/descrip"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/selamatdatang"
+            android:text="Silahkan login terlebih dahulu"
+            android:textColor="@color/text"
+            android:textSize="17sp"
+            tools:ignore="MissingPrefix" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txt_username"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Username"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            tools:ignore="MissingPrefix" />
+
+        <EditText
+            android:id="@+id/et_username"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/txt_username"
+            android:background="@drawable/edittext_style_login"
+            android:ems="15"
+            android:hint="example@gmail.com"
+            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
+            android:textColor="#3F4247"
+            android:textSize="16sp"
+            tools:ignore="MissingPrefix" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/txt_password"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Password"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            tools:ignore="MissingPrefix" />
+
+
+        <EditText
+            android:id="@+id/et_password"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/txt_password"
+            android:background="@drawable/edittext_style_login"
+            android:ems="15"
+            android:hint="*********"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:textColor="#3F4247"
+            android:textSize="16sp"
+            tools:ignore="MissingPrefix" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/btn_login"
             fontPath="font/TitilliumWeb-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/button_login"
+            android:text="MASUK"
+            android:textColor="@color/backgroundmain"
+            android:textSize="18sp"
+            tools:ignore="MissingPrefix" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tidakmemilikiakun"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Tidak memiliki akun?"
+            android:textAllCaps="false"
+            android:textColor="#3F4247"
+
+            android:textSize="14sp"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/toRegister"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tidakmemilikiakun"
+            android:text="Buat akun"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/iconApps"
+            android:textSize="15sp"
+            android:textStyle=""
             tools:ignore="MissingPrefix" />
     </RelativeLayout>
 
