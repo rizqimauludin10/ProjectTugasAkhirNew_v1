@@ -107,14 +107,19 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        Intent intent;
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_add) {
 
         } else if (id == R.id.nav_profile) {
+            intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_about) {
 
