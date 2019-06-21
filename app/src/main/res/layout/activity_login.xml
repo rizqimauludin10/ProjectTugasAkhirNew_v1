@@ -105,8 +105,23 @@
             android:inputType="textPassword"
             android:paddingStart="10dp"
             android:textColor="#3F4247"
+
             android:textSize="16sp"
             tools:ignore="MissingPrefix" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/show_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/show_password"
+                android:layout_gravity="right"
+                android:layout_marginTop="43dp"
+                android:layout_marginEnd="10dp" />
+        </FrameLayout>
 
     </RelativeLayout>
 
@@ -153,9 +168,9 @@
             fontPath="font/TitilliumWeb-SemiBold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:layout_toRightOf="@id/tidakmemilikiakun"
             android:text="Buat akun"
-            android:layout_marginLeft="3dp"
             android:textColor="@color/iconApps"
             android:textSize="15sp"
             android:textStyle=""
