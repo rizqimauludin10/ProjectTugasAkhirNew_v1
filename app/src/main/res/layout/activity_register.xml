@@ -4,27 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="70dp">
 
 
     </RelativeLayout>
 
+
     <RelativeLayout
-        android:id="@+id/headerlogin"
+        android:id="@+id/headerRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/selamatdatang"
+            android:id="@+id/selamatdatangRegister"
             fontPath="font/TitilliumWeb-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selamat Datang!"
+            android:text="Selamat Bergabung!"
             android:textColor="#3F4247"
             android:textSize="28sp"
             tools:ignore="MissingPrefix" />
@@ -34,13 +35,49 @@
             fontPath="font/TitilliumWeb-Regular.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/selamatdatang"
-            android:text="Silahkan masuk terlebih dahulu"
+            android:layout_below="@id/selamatdatangRegister"
+            android:text="Silahkan daftar terlebih dahulu"
             android:textColor="@color/text"
             android:textSize="17sp"
             tools:ignore="MissingPrefix" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <RadioGroup
+            android:id="@+id/rg_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/pemilikJasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pemilik Jasa"
+                android:checked="true"
+                android:textSize="16sp"
+                android:textColor="@color/username"
+                android:textAllCaps="false"
+                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                tools:ignore="MissingPrefix" />
+
+
+            <RadioButton
+                android:id="@+id/pencariJasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Pencari Jasa"
+                android:textAllCaps="false"
+                android:textColor="@color/username"
+                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                tools:ignore="MissingPrefix" />
+        </RadioGroup>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -48,7 +85,7 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/txt_username"
+            android:id="@+id/txt_username_register"
             fontPath="font/TitilliumWeb-Regular.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,11 +96,10 @@
             tools:ignore="MissingPrefix" />
 
         <EditText
-            android:id="@+id/et_username"
-
+            android:id="@+id/et_username_register"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_below="@id/txt_username"
+            android:layout_below="@id/txt_username_register"
             android:background="@drawable/edittext_style_login"
             android:ems="15"
             android:hint="example@gmail.com"
@@ -84,7 +120,7 @@
         android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/txt_password"
+            android:id="@+id/txt_password_register"
             fontPath="font/TitilliumWeb-Regular.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,11 +132,11 @@
 
 
         <EditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_password_register"
             fontPath="font/TitilliumWeb-Regular.ttf"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_below="@id/txt_password"
+            android:layout_below="@id/txt_password_register"
             android:background="@drawable/edittext_style_login"
             android:ems="15"
             android:hint="*********"
@@ -116,7 +152,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/show_password"
+                android:id="@+id/show_password_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/show_password"
@@ -128,22 +164,57 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/txt_noHp_regis"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="No. Handphone"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            tools:ignore="MissingPrefix" />
+
+        <EditText
+            android:id="@+id/et_noHp_regis"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/txt_noHp_regis"
+            android:background="@drawable/edittext_style_login"
+            android:ems="15"
+            android:hint="0812xxxxxxxx"
+            android:inputType="phone"
+            android:paddingStart="10dp"
+            android:textColor="#3F4247"
+            android:textSize="16sp"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            tools:ignore="MissingPrefix" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:padding="20dp">
 
+
         <Button
-            android:id="@+id/btn_login"
-            fontPath="font/TitilliumWeb-Bold.ttf"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/button_login"
-            android:text="MASUK"
+            android:text="DAFTAR"
             android:textColor="@color/backgroundmain"
             android:textSize="18sp"
+            fontPath="font/TitilliumWeb-Bold.ttf"
             tools:ignore="MissingPrefix" />
-
 
     </RelativeLayout>
 
@@ -153,29 +224,27 @@
         android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/tidakmemilikiakun"
+            android:id="@+id/sudahmemilikiakun"
             fontPath="font/TitilliumWeb-Regular.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Tidak memiliki akun?"
+            android:text="Sudah memiliki akun?"
             android:textAllCaps="false"
             android:textColor="#3F4247"
-
             android:textSize="14sp"
             tools:ignore="MissingPrefix" />
 
         <TextView
-            android:id="@+id/toRegister"
+            android:id="@+id/toLogin"
             fontPath="font/TitilliumWeb-SemiBold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@id/tidakmemilikiakun"
-            android:text="Buat akun"
+            android:layout_toRightOf="@id/sudahmemilikiakun"
+            android:text="Silahkan masuk"
             android:textColor="@color/iconApps"
             android:textSize="15sp"
-            android:textStyle=""
             tools:ignore="MissingPrefix" />
     </RelativeLayout>
 
