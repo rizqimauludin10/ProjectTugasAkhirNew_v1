@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFF"
-    tools:context=".MapsFragment">
-
-
-    <include layout="@layout/content_maps" />
-
+    tools:context=".InputActivity">
 
 </LinearLayout>
