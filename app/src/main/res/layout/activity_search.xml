@@ -19,6 +19,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
+            <!--<com.mancj.materialsearchbar.MaterialSearchBar
+                style="@style/MaterialSearchBarLight"
+                android:layout_gravity="center"
+                app:mt_speechMode="false"
+                app:mt_hint="Contohnya Pontianak Barat"
+                app:mt_maxSuggestionsCount="10"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                app:mt_navIconEnabled="false"
+                android:elevation="0dp"
+                android:outlineProvider="none"
+                app:mt_searchIconTint="@color/backgroundmain"
+                app:mt_backIconDrawable="@drawable/search"
+                app:mt_placeholder="Contohnya Pontianak Barat"
+                android:id="@+id/searchBar"
+                fontPath="font/TitilliumWeb-Regular.ttf"
+                tools:ignore="MissingPrefix"/>-->
+
             <EditText
                 android:layout_gravity="center"
                 android:id="@+id/search_activity_search"

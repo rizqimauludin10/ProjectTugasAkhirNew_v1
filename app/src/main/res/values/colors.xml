@@ -10,4 +10,6 @@
     <color name="iconApps">#13476A</color>
     <color name="background">#FFFFFF</color>
     <color name="backgroundmain">#F2F2F2</color>
+    <color name="bintang">#A02C2C</color>
+    <color name="colorTransparent">#cccccc</color>
 </resources>

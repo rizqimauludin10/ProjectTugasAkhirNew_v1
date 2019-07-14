@@ -4,6 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InputActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".InputActivity"
+    android:background="@color/backgroundmain"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/app_bar_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/btprofil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(*) "
+            android:textSize="16sp"
+            android:textColor="@color/bintang" />
+
+        <TextView
+            android:id="@+id/ketprofil"
+            android:layout_toEndOf="@id/btprofil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil"
+            android:textSize="16sp"
+            android:textColor="@color/text" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Laundry"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:hint="Contoh Nyuci Laundry"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi Laundry"
+            android:layout_marginTop="20dp"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:hint="Deskripsi tentang laundry"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            fontPath="font/TitilliumWeb-Regular.ttf"
+            tools:ignore="MissingPrefix" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

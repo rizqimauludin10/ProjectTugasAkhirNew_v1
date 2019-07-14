@@ -1,6 +1,7 @@
 package com.example.tugasakhir_nyuciapps;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,19 +38,11 @@ public class MainActivity extends AppCompatActivity
 
     EditText search_content;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Permission Maps
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            startActivity(new Intent(MainActivity.this, Search.class));
-            finish();
-            return;
-        }
-
 
         search_content = findViewById(R.id.search_activity_content);
 
@@ -57,46 +50,9 @@ public class MainActivity extends AppCompatActivity
         search_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dexter.withActivity(MainActivity.this)
-                        .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                        .withListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                startActivity(new Intent(MainActivity.this, Search.class));
-                                finish();
+                startActivity(new Intent(MainActivity.this, Search.class));
+                finish();
 
-                            }
-
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                if (response.isPermanentlyDenied()) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                    builder.setTitle("Permission Denied")
-                                            .setMessage("Permission to access device location is permanently denied. You need to go to setting to allow the permission")
-                                            .setNegativeButton("Cancel", null)
-                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Intent intent = new Intent();
-                                                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                                    intent.setData(Uri.fromParts("package", getPackageName(), null));
-                                                }
-                                            })
-                                            .show();
-                                } else {
-                                    Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
-
-                            }
-                        })
-
-                        .check();
             }
         });
 
@@ -105,14 +61,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("");
-        /*FloatingActionButton fab = findViewById(R.id.fab);*/
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -152,8 +102,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.customerservice) {
+
+            /*String phone = "6289685191803";
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://api.whatsapp.com/send?phone="+ phone +"&text=Saya%20perlu%20bantuan%20Admin%20Nyuci.in"));
+            startActivity(intent);*/
         }
 
         return super.onOptionsItemSelected(item);
@@ -171,12 +125,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_add) {
+            intent = new Intent(MainActivity.this, InputActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_profile) {
             intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_about) {
+
 
         } else if (id == R.id.nav_signout) {
 
