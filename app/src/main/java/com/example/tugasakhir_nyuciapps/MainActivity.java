@@ -1,35 +1,29 @@
 package com.example.tugasakhir_nyuciapps;
 
-import android.Manifest;
-import android.content.ClipData;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -37,12 +31,27 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     EditText search_content;
+    Dialog epicDialog;
+    Button cs_btnTidak, cs_btnYa;
+    ImageView closeBtn;
+    TextView title_cs, desc_cs;
+    ProgressDialog progressBar;
+
+    Context mContext;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        epicDialog = new Dialog(this);
+        cs_btnTidak = (Button) findViewById(R.id.cs_btnTidak);
+        cs_btnYa = (Button) findViewById(R.id.cs_btnYa);
+        closeBtn = (ImageView) findViewById(R.id.btn_close);
+        title_cs = (TextView) findViewById(R.id.title_cs);
+        desc_cs = (TextView) findViewById(R.id.desc_cs);
 
         search_content = findViewById(R.id.search_activity_content);
 
@@ -103,15 +112,52 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.customerservice) {
-
-            /*String phone = "6289685191803";
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://api.whatsapp.com/send?phone="+ phone +"&text=Saya%20perlu%20bantuan%20Admin%20Nyuci.in"));
-            startActivity(intent);*/
+            /*progressBar = ProgressDialog.show(MainActivity.this, null, "Sedang Menghubungkan...", true, false);*/
+            dialog();
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void dialog() {
+
+        epicDialog.setContentView(R.layout.cs_dialog);
+        closeBtn = (ImageView) epicDialog.findViewById(R.id.btn_close);
+        cs_btnYa = (Button) epicDialog.findViewById(R.id.cs_btnYa);
+        cs_btnTidak = (Button) epicDialog.findViewById(R.id.cs_btnTidak);
+        title_cs = (TextView) epicDialog.findViewById(R.id.title_cs);
+        desc_cs = (TextView) epicDialog.findViewById(R.id.desc_cs);
+
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epicDialog.dismiss();
+            }
+        });
+
+        cs_btnYa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phone = "6289685191803";
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://api.whatsapp.com/send?phone=" + phone + "&text=Saya%20perlu%20bantuan%20Admin%20Nyuci.in"));
+                startActivity(intent);
+            }
+        });
+
+        cs_btnTidak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epicDialog.dismiss();
+            }
+        });
+
+        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        epicDialog.show();
+
+    }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -133,7 +179,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_about) {
-
 
         } else if (id == R.id.nav_signout) {
 
