@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,12 +38,13 @@ public class MainActivity extends AppCompatActivity
 
     Context mContext;
 
-
+    private InternetCheck internetCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         epicDialog = new Dialog(this);
         cs_btnTidak = (Button) findViewById(R.id.cs_btnTidak);
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity
 
         search_content = findViewById(R.id.search_activity_content);
 
-
         search_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +63,15 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        //Internet Connection Check
+        internetCheck = new InternetCheck(this);
+        if (!internetCheck.isConnected(MainActivity.this)) {
+
+            internetCheck.buildDialog(MainActivity.this).show();
+        } else {
+            //Toast.makeText(MainActivity.this,"Welcome", Toast.LENGTH_SHORT).show();
+        }
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -156,7 +164,6 @@ public class MainActivity extends AppCompatActivity
         epicDialog.show();
 
     }
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -1,10 +1,5 @@
 package com.example.tugasakhir_nyuciapps;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +14,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -64,7 +64,6 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
-
 
             }
         });
@@ -161,6 +160,7 @@ public class SplashActivity extends AppCompatActivity {
                                     @Override
                                     public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                                         token.continuePermissionRequest();
+
 
                                     }
                                 })

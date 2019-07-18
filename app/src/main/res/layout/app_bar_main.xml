@@ -21,17 +21,25 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
+
         <TextView
+            android:id="@+id/tittlebar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:text="nyuci.in"
             android:textSize="24sp"
             android:textAllCaps="false"
             android:textColor="@color/tittleApps"
             fontPath="font/Dosis-SemiBold.ttf"
             tools:ignore="MissingPrefix"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logolaundry"
+            android:layout_marginRight="110dp" />
     </RelativeLayout>
 
 </RelativeLayout>

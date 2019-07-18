@@ -29,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,6 +94,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap.setMyLocationEnabled(true);
         //titik biru lokasi user pada maps
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
+        LatLng tes = new LatLng(-0.004943, 109.290522);
+
+        mMap.addMarker(new MarkerOptions()
+                .position(tes)
+                .title("TES");
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));
 
 
         if (mapView != null && mapView.findViewById(Integer.parseInt("1")) != null) {

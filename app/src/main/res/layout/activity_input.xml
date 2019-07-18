@@ -14,27 +14,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/btprofil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(*) "
-            android:textSize="16sp"
-            android:textColor="@color/bintang" />
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/ketprofil"
-            android:layout_toEndOf="@id/btprofil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profil"
+            android:text="Nama Laundry"
             android:textSize="16sp"
-            android:textColor="@color/text" />
+            android:textColor="@color/colorAccent"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/btprofil"
+            android:layout_toEndOf="@id/ketprofil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" *"
+            android:textSize="16sp"
+            android:textColor="@color/bintang" />
 
     </RelativeLayout>
 
@@ -46,47 +52,247 @@
         android:paddingLeft="20dp"
         android:paddingBottom="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Laundry"
-            fontPath="font/TitilliumWeb-SemiBold.ttf"
-            tools:ignore="MissingPrefix"
-            android:textSize="18sp" />
-
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="20"
-            android:hint="Contoh Nyuci Laundry"
-            android:textSize="16sp"
-            android:inputType="text"
-            android:layout_marginTop="10dp"
-            fontPath="font/TitilliumWeb-Regular.ttf"
-            tools:ignore="MissingPrefix" />
+            app:hintTextAppearance="@style/HintText">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Deskripsi Laundry"
-            android:layout_marginTop="20dp"
-            fontPath="font/TitilliumWeb-SemiBold.ttf"
-            tools:ignore="MissingPrefix"
-            android:textSize="18sp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="20"
+                android:hint="Masukkan Nama Laundry disini..."
+                android:textSize="16sp"
+                android:inputType="text"
+                fontPath="font/TitilliumWeb-Regular.ttf"
+                tools:ignore="MissingPrefix" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="20"
-            android:hint="Deskripsi tentang laundry"
-            android:textSize="16sp"
-            android:inputType="text"
-            android:layout_marginTop="10dp"
-            fontPath="font/TitilliumWeb-Regular.ttf"
-            tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/ketdesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi Laundry"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/HintText">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="20"
+                android:hint="Masukkan Deskripsi Laundry disini..."
+                android:textSize="16sp"
+                android:inputType="text"
+                fontPath="font/TitilliumWeb-Regular.ttf"
+                tools:ignore="MissingPrefix" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/ketHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Handphone"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/btHP"
+            android:layout_toEndOf="@id/ketHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" *"
+            android:textSize="16sp"
+            android:textColor="@color/bintang" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/HintText">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="20"
+                android:hint="Masukkan Nomor Whatsapp disini..."
+                android:textSize="16sp"
+                android:inputType="phone"
+                fontPath="font/TitilliumWeb-Regular.ttf"
+                tools:ignore="MissingPrefix" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/ketAlamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat Laundry"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/btAlamat"
+            android:layout_toEndOf="@id/ketAlamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" *"
+            android:textSize="16sp"
+            android:textColor="@color/bintang" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/HintText">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="20"
+                android:hint="Masukkan Nama Jalan, Kelurahan dll..."
+                android:textSize="16sp"
+                android:inputType="textLongMessage"
+                fontPath="font/TitilliumWeb-Regular.ttf"
+                tools:ignore="MissingPrefix" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/ketLibur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Libur Tanggal Merah"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/btLibur"
+            android:layout_toEndOf="@id/ketLibur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" *"
+            android:textSize="16sp"
+            android:textColor="@color/bintang" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp">
+
+        <RadioGroup
+            android:id="@+id/rg_Libur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rgLiburYa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ya"
+                android:checked="true"
+                android:textSize="16sp"
+                android:textColor="@color/username"
+                android:textAllCaps="false"
+                fontPath="font/TitilliumWeb-Regular.ttf"
+                tools:ignore="MissingPrefix" />
+
+            <RadioButton
+                android:id="@+id/rgLiburTidak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Tidak"
+                android:textAllCaps="false"
+                android:textColor="@color/username"
+                fontPath="font/TitilliumWeb-Regular.ttf"
+                tools:ignore="MissingPrefix" />
+        </RadioGroup>
+    </RelativeLayout>
 
 
 </LinearLayout>
