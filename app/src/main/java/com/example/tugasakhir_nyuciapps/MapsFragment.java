@@ -99,7 +99,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         mMap.addMarker(new MarkerOptions()
                 .position(tes)
-                .title("TES");
+                .title("TES"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));
 
 

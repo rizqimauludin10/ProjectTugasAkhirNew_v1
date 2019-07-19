@@ -1,5 +1,6 @@
 package com.example.tugasakhir_nyuciapps;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,10 +8,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,9 +38,14 @@ public class MainActivity extends AppCompatActivity
     Button cs_btnTidak, cs_btnYa;
     ImageView closeBtn;
     TextView title_cs, desc_cs;
+    TextView prusername, prphone;
+    TextView hai;
+    String username, phone;
     ProgressDialog progressBar;
 
     Context mContext;
+
+    SharedPrefManager sharedPrefManager;
 
     private InternetCheck internetCheck;
 
@@ -45,6 +54,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPrefManager = new SharedPrefManager(MainActivity.this.getApplicationContext());
+
+
 
         epicDialog = new Dialog(this);
         cs_btnTidak = (Button) findViewById(R.id.cs_btnTidak);
@@ -52,6 +64,11 @@ public class MainActivity extends AppCompatActivity
         closeBtn = (ImageView) findViewById(R.id.btn_close);
         title_cs = (TextView) findViewById(R.id.title_cs);
         desc_cs = (TextView) findViewById(R.id.desc_cs);
+
+        prusername = (TextView) findViewById(R.id.prusername);
+        prphone = (TextView) findViewById(R.id.prphone);
+
+        hai = (TextView) findViewById(R.id.hai);
 
         search_content = findViewById(R.id.search_activity_content);
 
@@ -87,7 +104,25 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            username = extras.getString("name");
+            phone = extras.getString("phone");
+
+            hai.setText(username);
+            /*prusername.setText(username);
+            prphone.setText(phone);*/
+        }
+
+        String email = sharedPrefManager.getSp_Email();
+        String phone = sharedPrefManager.getSP_Phone();
+        /*prusername.setText(email);
+        prphone.setText(phone);*/
+
     }
+
 
     @Override
     protected void attachBaseContext(Context newBase) {

@@ -1,33 +1,63 @@
 package com.example.tugasakhir_nyuciapps;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
+import com.example.tugasakhir_nyuciapps.apihelper.UtilsApi;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class RegisterActivity extends AppCompatActivity {
 
     ImageView showPassRegis;
-    EditText etPassRegis;
+    EditText etPassRegis, etUserRegis, etPhoneRegis;
     TextView toLogin;
+    Button btnRegister;
     boolean password_status = true;
+    ProgressDialog loading;
+
+
+    Context mContext;
+    BaseApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mContext = this;
+        mApiService = UtilsApi.getApiService();
+
         showPassRegis = (ImageView) findViewById(R.id.show_password_register);
+
         etPassRegis = (EditText) findViewById(R.id.et_password_register);
+        etUserRegis = (EditText) findViewById(R.id.et_username_register);
+        etPhoneRegis = (EditText) findViewById(R.id.et_noHp_regis);
+        btnRegister = (Button) findViewById(R.id.btn_register);
+
         toLogin = (TextView) findViewById(R.id.toLogin);
 
         toLogin.setOnClickListener(new View.OnClickListener() {
@@ -50,10 +80,61 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
+                requsetRegister();
+            }
+        });
     }
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    private void requsetRegister() {
+        mApiService.registerRequest(
+                etUserRegis.getText().toString(),
+                etPassRegis.getText().toString(),
+                etPhoneRegis.getText().toString()
+        )
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Log.i("debug", "OnResponse : Berhasil");
+                            loading.dismiss();
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.body().string());
+                                if (jsonObject.getString("error").equals("false")) {
+                                    Toast.makeText(mContext, "Berhasil Registrasi", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(mContext, LoginActivity.class));
+                                } else {
+                                    String error = jsonObject.getString("error");
+                                    Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Log.i("debug", "OnResponse : Gagal");
+                            loading.dismiss();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("debug", "OnFailure : Error > " + t.getMessage());
+                        Toast.makeText(mContext, "Koneksi Internet Bermasalah", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
     }
 }

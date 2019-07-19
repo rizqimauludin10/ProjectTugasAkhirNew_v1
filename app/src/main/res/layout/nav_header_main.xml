@@ -26,28 +26,29 @@
             android:layout_marginRight="20dp"/>
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/prusername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:textColor="@color/username"
             android:textSize="16sp"
-            android:text="@string/nav_header_title"
+
+            android:text="@string/nav_header_subtitle"
             fontPath="font/TitilliumWeb-Bold.ttf"
             tools:ignore="MissingPrefix"
             android:layout_toEndOf="@id/imageView"/>
 
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/prphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nav_header_subtitle"
+            android:text="@string/nav_header_title"
             android:textColor="@color/text"
             android:textSize="14sp"
             fontPath="font/TitilliumWeb-Regular.ttf"
             tools:ignore="MissingPrefix"
             android:layout_toEndOf="@id/imageView"
-            android:layout_below="@id/username"/>
+            android:layout_below="@id/prusername" />
 
     </RelativeLayout>
 
