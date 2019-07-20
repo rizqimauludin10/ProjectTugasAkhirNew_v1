@@ -36,14 +36,16 @@ public class MainActivity extends AppCompatActivity
 
     EditText search_content;
     Dialog epicDialog;
-    Button cs_btnTidak, cs_btnYa, btnLoginDrawer;
-    ImageView closeBtn, headerpict;
-    TextView title_cs, desc_cs;
+    Button cs_btnTidak, cs_btnYa, btnLoginDrawer, btncsLogin;
+    ImageView closeBtn, headerpict, closeBtnLogin;
+    TextView title_cs, desc_cs, desc_login;
     TextView prusername, prphone;
     TextView hai;
     String username, phone;
     ProgressDialog progressBar;
     NavigationView navigationView;
+
+    Intent intent;
 
     Context mContext;
 
@@ -66,9 +68,12 @@ public class MainActivity extends AppCompatActivity
         cs_btnTidak = (Button) findViewById(R.id.cs_btnTidak);
         cs_btnYa = (Button) findViewById(R.id.cs_btnYa);
         closeBtn = (ImageView) findViewById(R.id.btn_close);
+        closeBtnLogin = (ImageView) findViewById(R.id.btn_closeLogin);
 
         title_cs = (TextView) findViewById(R.id.title_cs);
         desc_cs = (TextView) findViewById(R.id.desc_cs);
+
+        desc_login = (TextView) findViewById(R.id.desc_login);
 
         prusername = (TextView) headerView.findViewById(R.id.prusername);
         prphone = (TextView) headerView.findViewById(R.id.prphone);
@@ -170,10 +175,42 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.customerservice) {
             /*progressBar = ProgressDialog.show(MainActivity.this, null, "Sedang Menghubungkan...", true, false);*/
-            dialog();
+
+            if (sharedPrefManager.getSPSudahLogin().equals(true)) {
+                dialog();
+            } else {
+                dialogLogin();
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void dialogLogin() {
+        epicDialog.setContentView(R.layout.cs_login);
+        closeBtnLogin = (ImageView) epicDialog.findViewById(R.id.btn_closeLogin);
+        desc_login = (TextView) epicDialog.findViewById(R.id.desc_login);
+        btncsLogin = (Button) epicDialog.findViewById(R.id.btn_cslogin);
+
+        closeBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epicDialog.dismiss();
+            }
+        });
+
+        btncsLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        epicDialog.show();
+
     }
 
     public void dialog() {
