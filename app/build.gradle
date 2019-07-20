@@ -48,4 +48,6 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+
 }

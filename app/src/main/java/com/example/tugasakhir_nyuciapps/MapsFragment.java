@@ -28,6 +28,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +40,7 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
@@ -53,6 +56,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private View mapView;
 
     private final float DEFAULT_ZOOM = 15;
+    private final float DEFAULT_ZOOM_MAX = 17.0f;
+
+
 
 
     public MapsFragment() {
@@ -99,7 +105,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         mMap.addMarker(new MarkerOptions()
                 .position(tes)
-                .title("TES"));
+                .title("TES")
+                .snippet("a"))
+                .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.mapsicon));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));
 
 

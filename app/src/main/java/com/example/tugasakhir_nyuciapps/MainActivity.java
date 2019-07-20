@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,13 +36,14 @@ public class MainActivity extends AppCompatActivity
 
     EditText search_content;
     Dialog epicDialog;
-    Button cs_btnTidak, cs_btnYa;
-    ImageView closeBtn;
+    Button cs_btnTidak, cs_btnYa, btnLoginDrawer;
+    ImageView closeBtn, headerpict;
     TextView title_cs, desc_cs;
     TextView prusername, prphone;
     TextView hai;
     String username, phone;
     ProgressDialog progressBar;
+    NavigationView navigationView;
 
     Context mContext;
 
@@ -57,16 +59,22 @@ public class MainActivity extends AppCompatActivity
         sharedPrefManager = new SharedPrefManager(MainActivity.this.getApplicationContext());
 
 
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
 
         epicDialog = new Dialog(this);
         cs_btnTidak = (Button) findViewById(R.id.cs_btnTidak);
         cs_btnYa = (Button) findViewById(R.id.cs_btnYa);
         closeBtn = (ImageView) findViewById(R.id.btn_close);
+
         title_cs = (TextView) findViewById(R.id.title_cs);
         desc_cs = (TextView) findViewById(R.id.desc_cs);
 
-        prusername = (TextView) findViewById(R.id.prusername);
-        prphone = (TextView) findViewById(R.id.prphone);
+        prusername = (TextView) headerView.findViewById(R.id.prusername);
+        prphone = (TextView) headerView.findViewById(R.id.prphone);
+        headerpict = (ImageView) headerView.findViewById(R.id.imageView);
+        btnLoginDrawer = (Button) headerView.findViewById(R.id.btnlogindrawer);
+
 
         hai = (TextView) findViewById(R.id.hai);
 
@@ -78,6 +86,14 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this, Search.class));
                 finish();
 
+            }
+        });
+
+        btnLoginDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
             }
         });
 
@@ -110,16 +126,14 @@ public class MainActivity extends AppCompatActivity
         if (extras != null) {
             username = extras.getString("name");
             phone = extras.getString("phone");
-
-            hai.setText(username);
-            /*prusername.setText(username);
-            prphone.setText(phone);*/
         }
 
         String email = sharedPrefManager.getSp_Email();
         String phone = sharedPrefManager.getSP_Phone();
-        /*prusername.setText(email);
-        prphone.setText(phone);*/
+        prusername.setText(email);
+        prphone.setText(phone);
+
+        hideMenu();
 
     }
 
@@ -217,12 +231,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_profile) {
-            intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
 
         } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_signout) {
+            sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLogin, false);
+            startActivity(new Intent(MainActivity.this, LauncherActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
 
         }
 
@@ -230,4 +246,33 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        /*MenuItem profile = menu.findItem(R.id.customerservice);*/
+
+        return true;
+    }
+
+
+    private void hideMenu() {
+        Menu nav_menu = navigationView.getMenu();
+
+        if (sharedPrefManager.getSPSudahLogin().equals(true)) {
+            nav_menu.findItem(R.id.nav_signout).setVisible(true);
+            btnLoginDrawer.setVisibility(View.GONE);
+            headerpict.setVisibility(View.VISIBLE);
+
+        } else {
+            nav_menu.findItem(R.id.nav_signout).setVisible(false);
+            nav_menu.findItem(R.id.nav_profile).setVisible(false);
+            prusername.setText("Kamu belum login, login dulu yuk");
+            prphone.setText("");
+            btnLoginDrawer.setVisibility(View.VISIBLE);
+            headerpict.setVisibility(View.GONE);
+        }
+
+
+    }
+
 }

@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +38,12 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etPassRegis, etUserRegis, etPhoneRegis;
     TextView toLogin;
     Button btnRegister;
+    RadioGroup radioGroup;
+    RadioButton pencarijasa, pemilikJasa;
     boolean password_status = true;
     ProgressDialog loading;
+
+    String level = "0";
 
 
     Context mContext;
@@ -57,6 +63,9 @@ public class RegisterActivity extends AppCompatActivity {
         etUserRegis = (EditText) findViewById(R.id.et_username_register);
         etPhoneRegis = (EditText) findViewById(R.id.et_noHp_regis);
         btnRegister = (Button) findViewById(R.id.btn_register);
+        radioGroup = (RadioGroup) findViewById(R.id.rg_user);
+        pemilikJasa = (RadioButton) findViewById(R.id.pemilikJasa);
+        pencarijasa = (RadioButton) findViewById(R.id.pencariJasa);
 
         toLogin = (TextView) findViewById(R.id.toLogin);
 
@@ -85,10 +94,25 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
+
                 requsetRegister();
             }
         });
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (pencarijasa.isChecked()) {
+                    level = "1";
+                    Toast.makeText(RegisterActivity.this, level, Toast.LENGTH_SHORT).show();
+                } else {
+                    level = "0";
+                    Toast.makeText(RegisterActivity.this, level, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -99,7 +123,8 @@ public class RegisterActivity extends AppCompatActivity {
         mApiService.registerRequest(
                 etUserRegis.getText().toString(),
                 etPassRegis.getText().toString(),
-                etPhoneRegis.getText().toString()
+                etPhoneRegis.getText().toString(),
+                level
         )
                 .enqueue(new Callback<ResponseBody>() {
                     @Override

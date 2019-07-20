@@ -78,7 +78,7 @@ public class SplashActivity extends AppCompatActivity {
         //MAPS PERMISSION
         if (ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, LauncherActivity.class));
             finish();
             return;
         }

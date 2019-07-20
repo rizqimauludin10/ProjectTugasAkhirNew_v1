@@ -17,5 +17,6 @@ public interface BaseApiService {
     @POST("auth/register")
     Call<ResponseBody> registerRequest(@Field("email") String email,
                                        @Field("password") String password,
-                                       @Field("phone") String phone);
+                                       @Field("phone") String phone,
+                                       @Field("level") String level);
 }

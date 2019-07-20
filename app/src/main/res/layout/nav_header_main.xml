@@ -32,7 +32,6 @@
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:textColor="@color/username"
             android:textSize="16sp"
-
             android:text="@string/nav_header_subtitle"
             fontPath="font/TitilliumWeb-Bold.ttf"
             tools:ignore="MissingPrefix"
@@ -44,11 +43,26 @@
             android:layout_height="wrap_content"
             android:text="@string/nav_header_title"
             android:textColor="@color/text"
-            android:textSize="14sp"
+            android:textSize="15sp"
             fontPath="font/TitilliumWeb-Regular.ttf"
             tools:ignore="MissingPrefix"
             android:layout_toEndOf="@id/imageView"
             android:layout_below="@id/prusername" />
+
+        <Button
+            android:id="@+id/btnlogindrawer"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/prphone"
+            android:layout_toRightOf="@id/imageView"
+            android:text="Login"
+            android:background="@drawable/logindrawer"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="15dp"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix" />
 
     </RelativeLayout>
 
