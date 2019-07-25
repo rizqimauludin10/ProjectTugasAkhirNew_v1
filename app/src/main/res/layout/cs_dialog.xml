@@ -70,7 +70,7 @@
                     android:textAlignment="center"
                     android:textSize="16sp"
                     android:text="Anda akan terhubung dengan Customer Service Nyuci.in."
-                    fontPath="font/TitilliumWeb-Light.ttf"
+                    fontPath="font/TitilliumWeb-Regular.ttf"
                     tools:ignore="MissingPrefix" />
 
                 <LinearLayout

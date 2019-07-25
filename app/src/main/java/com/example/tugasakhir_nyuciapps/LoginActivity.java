@@ -120,12 +120,15 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.e("debug", "OnResponse: Berhasil");
 
                                     Toast.makeText(mContext, "Berhasil Login", Toast.LENGTH_SHORT).show();
+                                    Integer id = jsonObject.getJSONObject("data").getInt("id");
                                     String email = jsonObject.getJSONObject("data").getString("email");
                                     String name = jsonObject.getJSONObject("data").getString("name");
                                     String phone = jsonObject.getJSONObject("data").getString("phone");
 
                                     //sharedPreferences
+                                    sharedPrefManager.saveSPInt(SharedPrefManager.SP_UserId, id);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_Email, email);
+                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_Email, name);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_Phone, phone);
                                     sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLogin, true);
 

@@ -134,7 +134,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         String email = sharedPrefManager.getSp_Email();
+        String name = sharedPrefManager.getSp_Name();
         String phone = sharedPrefManager.getSP_Phone();
+
         prusername.setText(email);
         prphone.setText(phone);
 

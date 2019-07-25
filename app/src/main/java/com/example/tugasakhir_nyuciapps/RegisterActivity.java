@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
 
-                requsetRegister();
+                requestRegister();
             }
         });
 
@@ -104,10 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (pencarijasa.isChecked()) {
                     level = "1";
-                    Toast.makeText(RegisterActivity.this, level, Toast.LENGTH_SHORT).show();
                 } else {
                     level = "0";
-                    Toast.makeText(RegisterActivity.this, level, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -119,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    private void requsetRegister() {
+    private void requestRegister() {
         mApiService.registerRequest(
                 etUserRegis.getText().toString(),
                 etPassRegis.getText().toString(),
