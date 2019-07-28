@@ -59,5 +59,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'com.github.PuffoCyano:Range-Time-Picker-Dialog:v1.8'
+    implementation 'com.borax12.materialdaterangepicker:library:1.9'
 
 }

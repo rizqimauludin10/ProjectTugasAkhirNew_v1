@@ -7,20 +7,18 @@ import java.util.List;
 
 public class LaundryDataResponse {
 
-    @SerializedName("message")
-    @Expose
-    private String message;
+    @SerializedName("error")
+    private String error;
 
     @SerializedName("values")
-    @Expose
     private List<Value> values;
 
     public String getMessage() {
-        return message;
+        return error;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.error = message;
     }
 
     public List<Value> getValues() {

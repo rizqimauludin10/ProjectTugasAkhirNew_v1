@@ -58,9 +58,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private final float DEFAULT_ZOOM = 15;
     private final float DEFAULT_ZOOM_MAX = 17.0f;
 
-
-
-
     public MapsFragment() {
     }
 
@@ -93,6 +90,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    public void map() {
+        LatLng tes = new LatLng(-0.141538, 109.411362);
+
+        mMap.addMarker(new MarkerOptions()
+                .position(tes)
+                .title("TES")
+                .snippet("a"))
+                .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.mapsicon));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));
+    }
+
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -101,14 +109,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //titik biru lokasi user pada maps
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-        LatLng tes = new LatLng(-0.004943, 109.290522);
+        map();
 
-        mMap.addMarker(new MarkerOptions()
-                .position(tes)
-                .title("TES")
-                .snippet("a"))
-                .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.mapsicon));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));
+
 
 
         if (mapView != null && mapView.findViewById(Integer.parseInt("1")) != null) {

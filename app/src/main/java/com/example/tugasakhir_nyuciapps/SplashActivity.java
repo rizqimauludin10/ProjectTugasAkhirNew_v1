@@ -21,11 +21,17 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -76,7 +82,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         //MAPS PERMISSION
-        if (ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+        if (ContextCompat.checkSelfPermission(SplashActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
             startActivity(new Intent(SplashActivity.this, LauncherActivity.class));
             finish();
@@ -126,45 +133,9 @@ public class SplashActivity extends AppCompatActivity {
                 mNextBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Dexter.withActivity(SplashActivity.this)
-                                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                                .withListener(new PermissionListener() {
-                                    @Override
-                                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                                        finish();
-                                    }
+                        //MapsPermission();
+                        CameraPermission();
 
-                                    @Override
-                                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                                        if (response.isPermanentlyDenied()) {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
-                                            builder.setTitle("Permission Denied")
-                                                    .setMessage("Permission to access device location is permanently denied. You need to go to setting to allow the permission")
-                                                    .setNegativeButton("Cancel", null)
-                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                            Intent intent = new Intent();
-                                                            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                                            intent.setData(Uri.fromParts("package", getPackageName(), null));
-                                                        }
-                                                    })
-                                                    .show();
-                                        } else {
-                                            Toast.makeText(SplashActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    }
-
-                                    @Override
-                                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                        token.continuePermissionRequest();
-
-
-                                    }
-                                })
-                                .check();
                     }
                 });
                 mPrevBtn.setText("Back");
@@ -189,5 +160,100 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+/*    private void MapsPermission() {
+        Dexter.withActivity(SplashActivity.this)
+                .withPermission(
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        //startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        //finish();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        if (response.isPermanentlyDenied()) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+                            builder.setTitle("Permission Denied")
+                                    .setMessage("Permission to access device location is permanently denied. You need to go to setting to allow the permission")
+                                    .setNegativeButton("Cancel", null)
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Intent intent = new Intent();
+                                            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            intent.setData(Uri.fromParts("package", getPackageName(), null));
+                                        }
+                                    })
+                                    .show();
+                        } else {
+                            //Toast.makeText(SplashActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+
+
+                    }
+                })
+                .check();
+    }*/
+
+    private void CameraPermission() {
+        Dexter.withActivity(SplashActivity.this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                            finish();
+                            //Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+                            builder.setTitle("Permission Denied")
+                                    .setMessage("Permission to access device location is permanently denied. You need to go to setting to allow the permission")
+                                    .setNegativeButton("Cancel", null)
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Intent intent = new Intent();
+                                            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            intent.setData(Uri.fromParts("package", getPackageName(), null));
+                                        }
+                                    })
+                                    .show();
+                        } else {
+                            Toast.makeText(SplashActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+
+                    }
+                }).withErrorListener(new PermissionRequestErrorListener() {
+            @Override
+            public void onError(DexterError error) {
+                Toast.makeText(getApplicationContext(), "Some Error! ", Toast.LENGTH_SHORT).show();
+            }
+        })
+                .onSameThread()
+                .check();
     }
 }

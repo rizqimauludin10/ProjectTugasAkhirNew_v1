@@ -12,6 +12,7 @@ public class SharedPrefManager {
     public static final String SP_Name = "spName";
     public static final Integer SP_UserId = 0;
     public static final Integer SP_LaundryId = 0;
+    public static final Integer SP_LocationId = 0;
 
     public static final String SP_SudahLogin = "spSudahLogin";
 
@@ -56,6 +57,10 @@ public class SharedPrefManager {
 
     public int getSP_LaundryId() {
         return (int) sharedPreferences.getInt(String.valueOf(SP_LaundryId), 0);
+    }
+
+    public int getSP_LocationId() {
+        return (int) sharedPreferences.getInt(String.valueOf(SP_LocationId), 0);
     }
 
     public Boolean getSPSudahLogin() {

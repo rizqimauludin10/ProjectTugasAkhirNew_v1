@@ -2,9 +2,12 @@ package com.example.tugasakhir_nyuciapps;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LauncherActivity extends AppCompatActivity {
 
@@ -21,6 +24,11 @@ public class LauncherActivity extends AppCompatActivity {
                 finish();
             }
         }, 3000);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 

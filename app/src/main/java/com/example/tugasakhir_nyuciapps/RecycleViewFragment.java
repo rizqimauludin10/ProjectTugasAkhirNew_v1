@@ -29,23 +29,18 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class RecycleViewFragment extends Fragment {
 
     View v;
 
-
-    /*@BindView(R.id.rvLaundry)*/
     RecyclerView rvLaundry;
     ProgressDialog progressDialog;
-
     Context context;
-    List<Value> semuaLaundryItemList = new ArrayList<>();
-    LaundryAdapter laundryAdapter;
-    BaseApiService baseApiService;
-
-
-
+    private List<Value> semuaLaundryItemList = new ArrayList<>();
+    private RecyclerView.Adapter laundryAdapter;
+    private BaseApiService baseApiService;
 
     public RecycleViewFragment() {
     }
@@ -62,13 +57,12 @@ public class RecycleViewFragment extends Fragment {
         baseApiService = UtilsApi.getApiService();
 
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         laundryAdapter = new LaundryAdapter(context, semuaLaundryItemList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         rvLaundry.setLayoutManager(layoutManager);
         rvLaundry.setItemAnimator(new DefaultItemAnimator());
-        rvLaundry.setAdapter(laundryAdapter);
 
-        //getResultListLaundry();
+        getResultListLaundry();
 
         return v;
 
@@ -80,6 +74,7 @@ public class RecycleViewFragment extends Fragment {
 
     }
 
+
     private void getResultListLaundry() {
         progressDialog = ProgressDialog.show(getActivity(), null, "Harap Tunggu...", true, false);
 
@@ -89,8 +84,7 @@ public class RecycleViewFragment extends Fragment {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
 
-                    final List<Value> semuaLaundryItemList = response.body().getValues();
-
+                    semuaLaundryItemList = response.body().getValues();
                     rvLaundry.setAdapter(new LaundryAdapter(context, semuaLaundryItemList));
                     laundryAdapter.notifyDataSetChanged();
                 } else {
@@ -106,4 +100,6 @@ public class RecycleViewFragment extends Fragment {
             }
         });
     }
+
+
 }

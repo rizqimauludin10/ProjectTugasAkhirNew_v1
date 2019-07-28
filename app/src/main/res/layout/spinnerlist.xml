@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView android:layout_width="match_parent"
+    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:textSize="16sp"
+    android:paddingLeft="10dp"
+    android:text="Spinner"
+    android:textColor="@color/colorAccent"
+    fontPath="font/TitilliumWeb-Regular.ttf"
+    tools:ignore="MissingPrefix"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

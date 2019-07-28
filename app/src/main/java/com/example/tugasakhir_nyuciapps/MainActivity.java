@@ -108,13 +108,12 @@ public class MainActivity extends AppCompatActivity
 
             internetCheck.buildDialog(MainActivity.this).show();
         } else {
-            //Toast.makeText(MainActivity.this,"Welcome", Toast.LENGTH_SHORT).show();
+
         }
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setTitle("");
 
 
