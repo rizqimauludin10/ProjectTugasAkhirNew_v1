@@ -238,7 +238,7 @@ public class SplashActivity extends AppCompatActivity {
                                     })
                                     .show();
                         } else {
-                            Toast.makeText(SplashActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SplashActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
                         }
                     }
 

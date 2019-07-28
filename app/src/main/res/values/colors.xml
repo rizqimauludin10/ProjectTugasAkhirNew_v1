@@ -11,5 +11,6 @@
     <color name="background">#FFFFFF</color>
     <color name="backgroundmain">#F2F2F2</color>
     <color name="bintang">#FF0000</color>
+    <color name="tutup">#EE2727</color>
     <color name="colorTransparent">#cccccc</color>
 </resources>
