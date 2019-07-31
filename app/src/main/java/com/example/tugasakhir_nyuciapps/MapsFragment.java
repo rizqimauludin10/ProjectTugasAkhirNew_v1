@@ -2,19 +2,34 @@ package com.example.tugasakhir_nyuciapps;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.tugasakhir_nyuciapps.adapter.LaundryAdapter;
+import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
+import com.example.tugasakhir_nyuciapps.model.LaundryDataResponse;
+import com.example.tugasakhir_nyuciapps.model.Value;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -28,9 +43,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,9 +55,18 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.maps.android.clustering.ClusterManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
@@ -57,6 +81,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private final float DEFAULT_ZOOM = 15;
     private final float DEFAULT_ZOOM_MAX = 17.0f;
+
+    MarkerOptions markerOptions = new MarkerOptions();
+    public static final String TITLE = "laundry_name";
+    public static final String LAT = "laundry_address_lat";
+    public static final String LNG = "laundry_address_lng";
+
+    private String url = "http://192.168.43.93:8000/api/laundry";
+    String tag_json_obj = "json_obj_req";
+    String title;
+    LatLng latLng;
 
     public MapsFragment() {
     }
@@ -90,16 +124,29 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-    public void map() {
-        LatLng tes = new LatLng(-0.141538, 109.411362);
+    public void addMarkerMaps(LatLng latlng, final String title) {
+        markerOptions.position(latlng);
+        markerOptions.title(title);
+        mMap.addMarker(markerOptions);
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Toast.makeText(getActivity(), marker.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*LatLng tes = new LatLng(-0.141538, 109.411362);
 
         mMap.addMarker(new MarkerOptions()
                 .position(tes)
                 .title("TES")
                 .snippet("a"))
                 .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.mapsicon));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));*/
+
     }
+
 
     @SuppressLint("MissingPermission")
     @Override
@@ -108,11 +155,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap.setMyLocationEnabled(true);
         //titik biru lokasi user pada maps
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-
-        map();
-
-
-
 
         if (mapView != null && mapView.findViewById(Integer.parseInt("1")) != null) {
             View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
@@ -153,6 +195,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 }
             });
         }
+
+        getMarkers();
+
     }
 
     @Override
@@ -198,6 +243,43 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         }
                     }
                 });
+    }
+
+    private void getMarkers() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String getObject = jObj.getString("values");
+                    JSONArray jsonArray = new JSONArray(getObject);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        title = jsonObject.getString(TITLE);
+                        latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)),
+                                Double.parseDouble(jsonObject.getString(LNG)));
+
+                        // Menambah data marker untuk di tampilkan ke google map
+                        addMarkerMaps(latLng, title);
+                    }
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Error: ", error.getMessage());
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
+
 
     }
 }

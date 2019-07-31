@@ -300,6 +300,120 @@
             android:paddingRight="20dp">
 
             <TextView
+                android:id="@+id/ketLat"
+                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lattitude"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/btLat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/ketLat"
+                android:text=" *"
+                android:textColor="@color/bintang"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/HintText">
+
+                <EditText
+                    android:id="@+id/LatLaundry"
+                    fontPath="font/TitilliumWeb-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:hint="Contohnya -0.141538"
+                    android:inputType="textLongMessage"
+                    android:textSize="16sp"
+                    tools:ignore="MissingPrefix" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/ketLng"
+                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Longitude"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/btLng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/ketLng"
+                android:text=" *"
+                android:textColor="@color/bintang"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/HintText">
+
+                <EditText
+                    android:id="@+id/LngLaundry"
+                    fontPath="font/TitilliumWeb-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:hint="Contohnya 109.411362"
+                    android:inputType="textLongMessage"
+                    android:textSize="16sp"
+                    tools:ignore="MissingPrefix" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp">
+
+            <TextView
                 android:id="@+id/ketLibur"
                 fontPath="font/TitilliumWeb-SemiBold.ttf"
                 android:layout_width="wrap_content"

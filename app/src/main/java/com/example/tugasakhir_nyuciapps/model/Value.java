@@ -25,6 +25,14 @@ public class Value {
     @Expose
     private String laundryPhone;
 
+    @SerializedName("created_at")
+    @Expose
+
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+
     @SerializedName("location_name")
     @Expose
     private String locationName;
@@ -269,5 +277,19 @@ public class Value {
         this.name = name;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

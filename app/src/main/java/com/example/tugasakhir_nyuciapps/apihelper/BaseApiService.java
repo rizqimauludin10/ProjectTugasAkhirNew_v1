@@ -42,4 +42,7 @@ public interface BaseApiService {
 
     @GET("laundry")
     Call<LaundryDataResponse> getLaundry();
+
+    @GET("laundry")
+    Call<ResponseBody> getLaundryarker();
 }

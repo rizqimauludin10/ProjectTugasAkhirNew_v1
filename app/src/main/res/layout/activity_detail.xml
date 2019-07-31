@@ -1,16 +1,516 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".DetailActivity">
 
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phone" />
+    <!--<include
+        layout="@layout/app_bar_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
 
-</LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/teslaundry"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/statusbuka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buka"
+                    android:textSize="16sp"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                    tools:ignore="MissingPrefix" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/circle" />
+
+                <TextView
+                    android:id="@+id/alamatLaundry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat"
+                    android:textSize="16sp"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                    tools:ignore="MissingPrefix" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tvNamaLaundry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Laundry"
+                    android:maxLength="15"
+                    android:textSize="22sp"
+                    android:textColor="@color/username"
+                    android:layout_marginRight="5dp"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                    tools:ignore="MissingPrefix" />
+
+                <TextView
+                    android:id="@+id/tvLokasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lokasi"
+                    android:maxLength="20"
+                    android:textSize="22sp"
+                    android:textColor="@color/username"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                    tools:ignore="MissingPrefix" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_check_circle_24dp" />
+
+                <TextView
+                    android:id="@+id/tvCreatedAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update"
+                    android:maxLength="16"
+                    android:textSize="14sp"
+                    fontPath="font/TitilliumWeb-Regular.ttf"
+                    tools:ignore="MissingPrefix" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/backgroundmain" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_access_time_black_24dp"
+                        android:layout_marginRight="5dp" />
+
+                    <TextView
+                        android:id="@+id/jamBuka"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Buka"
+                        android:maxLength="5"
+                        android:textSize="16sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="-"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/jamTutup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tutup"
+                        android:maxLength="5"
+                        android:textSize="16sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/backgroundmain" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Operasional"
+                    android:textSize="20sp"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                    tools:ignore="MissingPrefix" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivLiburTanggalMerah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_check_circle_black_24dp"
+                        android:layout_marginRight="10dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Libur Tanggal Merah"
+                        android:textSize="16sp"
+                        fontPath="font/TitilliumWeb-Regular.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivHarian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_check_circle_black_24dp"
+                        android:layout_marginRight="10dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Libur Harian,"
+                        android:textSize="16sp"
+                        android:layout_marginRight="10dp"
+                        fontPath="font/TitilliumWeb-Regular.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/tvLiburHarian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hari"
+                        android:textSize="16sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fasilitas"
+                        android:textSize="20sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="20dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/iconfasil1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_cancel_black_24dp"
+                                    android:layout_centerHorizontal="true" />
+
+                                <TextView
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cuci Biasa"
+                                    android:layout_marginRight="30dp"
+                                    android:layout_below="@id/iconfasil1"
+                                    android:textSize="16sp"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cuci Kilat"
+                                    android:layout_marginRight="30dp"
+                                    android:textSize="16sp"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Setrika"
+                                    android:layout_marginRight="30dp"
+                                    android:textSize="16sp"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cuci Sepatu"
+                                    android:layout_marginRight="30dp"
+                                    android:textSize="16sp"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cuci Karpet"
+                                    android:layout_marginRight="30dp"
+                                    android:textSize="16sp"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Antar Jemput"
+                                    android:layout_marginRight="30dp"
+                                    android:textSize="16sp"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pilihan Parfum"
+                                    android:layout_marginRight="30dp"
+                                    android:textSize="16sp"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/backgroundmain" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="Data bisa berubah sewaktu waktu tanyakan data saat ini"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix"
+                        android:layout_marginBottom="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/whatsapp"
+                            android:layout_marginRight="10dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pemilik Laundry"
+                                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                tools:ignore="MissingPrefix"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tvNamaPemilik"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nama Pemilik Laundry"
+                                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                tools:ignore="MissingPrefix"
+                                android:textSize="16sp"
+                                android:layout_marginTop="5dp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="5dp">
+
+                                <TextView
+                                    android:id="@+id/tvNomorPemilik"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="08968519"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix"
+                                    android:textSize="16sp"
+                                    android:maxLength="6" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="xxxxxx"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    tools:ignore="MissingPrefix"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/hubungiPemilik"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Hubungi Pemilik Jasa"
+                        android:textColor="@color/white"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix"
+                        android:textAllCaps="false"
+                        android:textSize="20sp"
+                        android:background="@drawable/btn_hubungi" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

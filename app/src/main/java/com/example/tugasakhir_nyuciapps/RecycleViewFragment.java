@@ -84,7 +84,6 @@ public class RecycleViewFragment extends Fragment {
             public void onResponse(Call<LaundryDataResponse> call, Response<LaundryDataResponse> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
-
                     semuaLaundryItemList = response.body().getValues();
                     rvLaundry.setAdapter(new LaundryAdapter(context, semuaLaundryItemList));
                     laundryAdapter.notifyDataSetChanged();

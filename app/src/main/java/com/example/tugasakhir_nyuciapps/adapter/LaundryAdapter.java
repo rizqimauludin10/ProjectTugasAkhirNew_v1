@@ -34,8 +34,10 @@ import butterknife.ButterKnife;
 public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryHolder> {
     List<Value> semuaLaundryList;
     Context context;
-    String apa, name, date1, date2;
-    String buka;
+    String phone, alamat, name, lokasi, created_at, buka, tutup, liburHarian, namapemilik,
+            noHpPemilik;
+    Integer tglmerah;
+    String date1, date2;
 
 
     public LaundryAdapter(Context context, List<Value> laundryList) {
@@ -48,23 +50,9 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
     @Override
     public LaundryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemlaundry, parent, false);
-        LaundryHolder laundryHolder = new LaundryHolder(view);
-
-        laundryHolder.itemClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(view.getContext(),"Welcome", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, DetailActivity.class);
-
-                intent.putExtra("phone", apa);
-                intent.putExtra("name", name);
-
-                context.startActivity(intent);
-
-            }
-        });
-
+        final LaundryHolder laundryHolder = new LaundryHolder(view);
         return laundryHolder;
+
     }
 
     @Override
@@ -75,11 +63,46 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
         holder.tvLokasi.setText(semualaundryItem.getLocationName());
         holder.harga.setText(semualaundryItem.getNyuciservicePrice());
         holder.fasilitas.setText(semualaundryItem.getServiceName());
+
         //holder.jamBuka.setText(semualaundryItem.getNyucischeduleOpenHours());
 
+        holder.itemClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(view.getContext(),"Welcome" + name, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, DetailActivity.class);
+                name = semualaundryItem.getLaundryName();
+                alamat = semualaundryItem.getLaundryAddress();
+                phone = semualaundryItem.getLaundryPhone();
+                lokasi = semualaundryItem.getLocationName();
+                created_at = semualaundryItem.getCreatedAt();
+                buka = semualaundryItem.getNyucischeduleOpenHours();
+                tutup = semualaundryItem.getNyucischeduleCloseHours();
+                tglmerah = semualaundryItem.getLaundryIsHoliday();
+                liburHarian = semualaundryItem.getNyucischeduleDay();
+                namapemilik = semualaundryItem.getName();
+                noHpPemilik = semualaundryItem.getLaundryPhone();
 
-        apa = semualaundryItem.getLaundryPhone();
-        name = semualaundryItem.getLaundryName();
+
+                intent.putExtra("name", name);
+                intent.putExtra("alamat", alamat);
+                intent.putExtra("phone", phone);
+                intent.putExtra("lokasi", lokasi);
+                intent.putExtra("created_at", created_at);
+                intent.putExtra("buka", buka);
+                intent.putExtra("tutup", tutup);
+                intent.putExtra("tglmerah", tglmerah);
+                intent.putExtra("liburharian", liburHarian);
+                intent.putExtra("namapemilik", namapemilik);
+                intent.putExtra("nohppemilik", noHpPemilik);
+
+                context.startActivity(intent);
+            }
+        });
+
+
+
+
         date1 = semualaundryItem.getNyucischeduleOpenHours();
         date2 = semualaundryItem.getNyucischeduleCloseHours();
 
@@ -102,7 +125,6 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
             holder.jamBuka.setText("Tutup");
             holder.jamBuka.setTextColor(Color.parseColor("#EE2727"));
             Log.d("Operasional", "Close");
-
         }
     }
 
@@ -157,6 +179,5 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
             ButterKnife.bind(this, itemView);
         }
     }
-
 
 }

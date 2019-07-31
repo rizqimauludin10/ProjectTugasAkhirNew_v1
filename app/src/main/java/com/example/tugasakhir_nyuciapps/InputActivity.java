@@ -59,7 +59,7 @@ public class InputActivity extends AppCompatActivity {
 
     Context mContext;
     BaseApiService mApiService;
-    EditText nama, alamat, phone, desc;
+    EditText nama, alamat, phone, desc, lat, lng;
     TextView tvPath;
 
     Spinner kecamatan;
@@ -68,10 +68,8 @@ public class InputActivity extends AppCompatActivity {
     RadioButton ya, tidak;
     Button simpan, openPhoto;
     Integer userid;
-    String libur = "0";
+    String libur;
     String location;
-    String lat = "01010101";
-    String lng = "10101010";
     String status = "1";
     String path;
     String namaFileGambar;
@@ -116,6 +114,8 @@ public class InputActivity extends AppCompatActivity {
         backButton2 = (ImageView) findViewById(R.id.backbutton2);
         openPhoto = (Button) findViewById(R.id.openCamera);
         Ivphoto = (ImageView) findViewById(R.id.photo);
+        lat = (EditText) findViewById(R.id.LatLaundry);
+        lng = (EditText) findViewById(R.id.LngLaundry);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnerlist, kecamatanlist);
 
@@ -182,6 +182,17 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
+        rglibur.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (ya.isChecked()) {
+                    libur = "1";
+                } else {
+                    libur = "0";
+                }
+            }
+        });
+
 
     }
 
@@ -243,7 +254,7 @@ public class InputActivity extends AppCompatActivity {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             Ivphoto.setImageBitmap(thumbnail);
             saveImage(thumbnail);
-            Toast.makeText(InputActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(InputActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -289,8 +300,8 @@ public class InputActivity extends AppCompatActivity {
                 phone.getText().toString(),
                 libur,
                 alamat.getText().toString(),
-                lat,
-                lng,
+                lat.getText().toString(),
+                lng.getText().toString(),
                 status
         ).enqueue(new Callback<ResponseBody>() {
             @Override
