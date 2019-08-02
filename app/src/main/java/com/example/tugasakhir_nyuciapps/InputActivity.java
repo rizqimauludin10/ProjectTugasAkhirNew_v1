@@ -1,6 +1,5 @@
 package com.example.tugasakhir_nyuciapps;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,20 +30,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
 import com.example.tugasakhir_nyuciapps.apihelper.UtilsApi;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.FetchPlaceRequest;
-import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.net.PlacesClient;
-
-
-///import com.schibstedspain.leku.LocationPickerActivity;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,19 +38,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+///import com.schibstedspain.leku.LocationPickerActivity;
 
 public class InputActivity extends AppCompatActivity {
 
@@ -77,6 +58,7 @@ public class InputActivity extends AppCompatActivity {
     Context mContext;
     BaseApiService mApiService;
     EditText nama, alamat, phone, desc, lat, lng;
+    Double latEx, lngEX;
     TextView tvPath, tvLatLaundry;
 
     Spinner kecamatan;
@@ -139,6 +121,15 @@ public class InputActivity extends AppCompatActivity {
         lng = (EditText) findViewById(R.id.LngLaundry);
         tvLatLaundry = (TextView) findViewById(R.id.ketLat);
         bttampilMaps = (Button) findViewById(R.id.tampilMaps);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            latEx = extras.getDouble("lat", 0);
+            lngEX = extras.getDouble("lng", 0);
+            lat.setText("" + latEx);
+            lng.setText("" + lngEX);
+
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnerlist, kecamatanlist);
 
@@ -220,8 +211,12 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showPlacePicker();
+
+
             }
         });
+
+
     }
 
 

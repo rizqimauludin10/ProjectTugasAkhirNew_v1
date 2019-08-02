@@ -32,8 +32,13 @@
     </style>
 
     <style name="HintText" parent="TextAppearance.Design.Hint">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/username</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/tittleApps</item>
+    </style>
+
+    <style name="MyEditTextStyle2" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">@color/tittleApps</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
     </style>
 
 </resources>
