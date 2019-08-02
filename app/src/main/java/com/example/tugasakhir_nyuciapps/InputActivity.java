@@ -1,5 +1,6 @@
 package com.example.tugasakhir_nyuciapps;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,6 +31,20 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
 import com.example.tugasakhir_nyuciapps.apihelper.UtilsApi;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.net.PlacesClient;
+
+
+///import com.schibstedspain.leku.LocationPickerActivity;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +54,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -53,6 +69,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class InputActivity extends AppCompatActivity {
 
+
     Toolbar toolbar;
     ImageView backButton2;
     SharedPrefManager sharedPrefManager;
@@ -60,13 +77,13 @@ public class InputActivity extends AppCompatActivity {
     Context mContext;
     BaseApiService mApiService;
     EditText nama, alamat, phone, desc, lat, lng;
-    TextView tvPath;
+    TextView tvPath, tvLatLaundry;
 
     Spinner kecamatan;
 
     RadioGroup rglibur;
     RadioButton ya, tidak;
-    Button simpan, openPhoto;
+    Button simpan, openPhoto, bttampilMaps;
     Integer userid;
     String libur;
     String location;
@@ -74,6 +91,7 @@ public class InputActivity extends AppCompatActivity {
     String path;
     String namaFileGambar;
     String gambar;
+    private static final int PLACE_PICKER_REQUEST = 1001;
 
     private ImageView Ivphoto;
     private static final String IMAGE_DIRECTORY = "/nyuciin";
@@ -94,6 +112,9 @@ public class InputActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+
+        /*Places.initialize(getApplicationContext(), "AIzaSyB6eSue5JEk-Un_bNSxomc-2x5gygGbCpM");
+        PlacesClient placesClient = Places.createClient(this);*/
 
         mContext = this;
         mApiService = UtilsApi.getApiService();
@@ -116,6 +137,8 @@ public class InputActivity extends AppCompatActivity {
         Ivphoto = (ImageView) findViewById(R.id.photo);
         lat = (EditText) findViewById(R.id.LatLaundry);
         lng = (EditText) findViewById(R.id.LngLaundry);
+        tvLatLaundry = (TextView) findViewById(R.id.ketLat);
+        bttampilMaps = (Button) findViewById(R.id.tampilMaps);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnerlist, kecamatanlist);
 
@@ -193,8 +216,14 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-
+        bttampilMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPlacePicker();
+            }
+        });
     }
+
 
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
@@ -229,9 +258,21 @@ public class InputActivity extends AppCompatActivity {
         startActivityForResult(intent, CAMERA);
     }
 
+
+    private void showPlacePicker() {
+        Intent intent = new Intent(InputActivity.this, PlacePickerMapsActivity.class);
+        startActivity(intent);
+       /* YandexPlacePicker.IntentBuilder builder = new YandexPlacePicker.IntentBuilder();
+        builder.setYandexMapsKey("AIzaSyDybP3bzvK6j6SGr14X_9HR__J30SZNdPY");
+        Intent placeIntent = builder.build(InputActivity.this);
+        startActivityForResult(placeIntent, PLACE_PICKER_REQUEST);*/
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
 
         if (resultCode == this.RESULT_CANCELED) {
             return;

@@ -12,4 +12,5 @@
     <string name="menu_profile">Profil</string>
     <string name="menu_about">Tentang</string>
     <string name="menu_signout">Keluar</string>
+    <string name="title_activity_place_picker_maps">Map</string>
 </resources>

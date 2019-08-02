@@ -25,11 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.tugasakhir_nyuciapps.adapter.LaundryAdapter;
-import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
-import com.example.tugasakhir_nyuciapps.model.LaundryDataResponse;
-import com.example.tugasakhir_nyuciapps.model.Value;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -52,8 +47,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.AutocompletePrediction;
-import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import org.json.JSONArray;
@@ -73,7 +66,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlacesClient placesClient;
-    private List<AutocompletePrediction> predictionList;
 
     private Location mLastKnownLocation;
     private LocationCallback locationCallback;
@@ -91,6 +83,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     String tag_json_obj = "json_obj_req";
     String title;
     LatLng latLng;
+
 
     public MapsFragment() {
     }
@@ -113,7 +106,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         Places.initialize(getActivity(), "AIzaSyB6eSue5JEk-Un_bNSxomc-2x5gygGbCpM");
         placesClient = Places.createClient(getActivity());
-        AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
 
     }
 
