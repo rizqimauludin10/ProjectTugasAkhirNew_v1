@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.example.tugasakhir_nyuciapps.DetailActivity;
 import com.example.tugasakhir_nyuciapps.MainActivity;
 import com.example.tugasakhir_nyuciapps.R;
 import com.example.tugasakhir_nyuciapps.model.Value;
+import com.squareup.picasso.Picasso;
 
 import java.security.PublicKey;
 import java.text.ParseException;
@@ -38,6 +40,7 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
             noHpPemilik;
     Integer tglmerah;
     String date1, date2;
+    String path = "http://192.168.43.93:8000/images/";
 
 
     public LaundryAdapter(Context context, List<Value> laundryList) {
@@ -58,6 +61,8 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
     @Override
     public void onBindViewHolder(@NonNull LaundryHolder holder, int position) {
         final Value semualaundryItem = semuaLaundryList.get(position);
+        //holder.IvLaundry.setImageResource(semualaundryItem.getLaundryPict());
+        Picasso.get().load(path + semualaundryItem.getLaundryPict()).into(holder.IvLaundry);
         holder.tvNamaLaundry.setText(semualaundryItem.getLaundryName());
         holder.tvDescLaundry.setText(semualaundryItem.getLaundryAddress());
         holder.tvLokasi.setText(semualaundryItem.getLocationName());
@@ -71,6 +76,7 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
             public void onClick(View view) {
                 //Toast.makeText(view.getContext(),"Welcome" + name, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, DetailActivity.class);
+
                 name = semualaundryItem.getLaundryName();
                 alamat = semualaundryItem.getLaundryAddress();
                 phone = semualaundryItem.getLaundryPhone();
@@ -149,6 +155,7 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
 
         public TextView tvNamaLaundry, fasilitas;
         public TextView tvDescLaundry, tvLokasi, rp, harga, kg, jamBuka;
+        public ImageView IvLaundry;
         public LinearLayout itemClick;
 
 
@@ -158,6 +165,7 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
             Typeface typeface = Typeface.createFromAsset(context.getAssets(), "font/TitilliumWeb-Regular.ttf");
             Typeface typeface1 = Typeface.createFromAsset(context.getAssets(), "font/TitilliumWeb-SemiBold.ttf");
             Typeface typeface2 = Typeface.createFromAsset(context.getAssets(), "font/TitilliumWeb-Bold.ttf");
+            IvLaundry = itemView.findViewById(R.id.IvLaundry);
             tvNamaLaundry = itemView.findViewById(R.id.tvNamaLaundry);
             tvNamaLaundry.setTypeface(typeface);
             tvDescLaundry = itemView.findViewById(R.id.tvDescLaundry);

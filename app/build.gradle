@@ -63,12 +63,7 @@ dependencies {
     implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
     implementation 'com.google.android.libraries.places:places:2.0.0'
 
-    //implementation 'com.schibstedspain.android:leku:6.3.0'
-    //implementation 'com.github.rtchagas:pingplacepicker:1.1.+'
-    //implementation 'com.sucho:placepicker:0.1.6'
-    //implementation 'com.github.vanyasem:YandexPlacePicker:1.0'
-
-
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
@@ -87,4 +82,3 @@ configurations.all {
     // https://stackoverflow.com/questions/52521302/how-to-solve-program-type-already-present-com-google-common-util-concurrent-lis
     exclude group: 'com.google.guava', module: 'listenablefuture'
 }
-

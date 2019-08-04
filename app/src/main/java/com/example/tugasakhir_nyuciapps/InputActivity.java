@@ -6,11 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,7 +38,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Calendar;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -67,17 +66,18 @@ public class InputActivity extends AppCompatActivity {
     RadioButton ya, tidak;
     Button simpan, openPhoto, bttampilMaps;
     Integer userid;
-    String libur;
+    String libur = "0";
     String location;
     String status = "1";
-    String path;
+    Bitmap bitmap;
     String namaFileGambar;
-    String gambar;
-    private static final int PLACE_PICKER_REQUEST = 1001;
+    Uri image;
+
+    public static final int IMG_REQUEST = 777;
 
     private ImageView Ivphoto;
     private static final String IMAGE_DIRECTORY = "/nyuciin";
-    private int GALLERY = 1, CAMERA = 2;
+    private int CAMERA = 2;
 
     ProgressDialog loading;
 
@@ -95,8 +95,6 @@ public class InputActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
 
-        /*Places.initialize(getApplicationContext(), "AIzaSyB6eSue5JEk-Un_bNSxomc-2x5gygGbCpM");
-        PlacesClient placesClient = Places.createClient(this);*/
 
         mContext = this;
         mApiService = UtilsApi.getApiService();
@@ -177,13 +175,15 @@ public class InputActivity extends AppCompatActivity {
             public void onClick(View view) {
                 loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
                 requestSimpan();
+
+
             }
         });
 
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InputActivity.this, InputJadwalActivity.class));
+                startActivity(new Intent(InputActivity.this, MainActivity.class));
                 finish();
             }
         });
@@ -212,7 +212,6 @@ public class InputActivity extends AppCompatActivity {
             public void onClick(View view) {
                 showPlacePicker();
 
-
             }
         });
 
@@ -231,7 +230,8 @@ public class InputActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i) {
                     case 0:
-                        choosePhotofromGallery();
+                        selectImage();
+                        //choosePhotofromGallery();
                         break;
                     case 1:
                         takePhotofromCamera();
@@ -242,25 +242,29 @@ public class InputActivity extends AppCompatActivity {
         pictureDialog.show();
     }
 
-    public void choosePhotofromGallery() {
+    public void selectImage() {
+        /*Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMG_REQUEST);*/
+
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galleryIntent, GALLERY);
+        startActivityForResult(galleryIntent, IMG_REQUEST);
+
     }
+
 
     private void takePhotofromCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
+
     }
 
 
     private void showPlacePicker() {
         Intent intent = new Intent(InputActivity.this, PlacePickerMapsActivity.class);
         startActivity(intent);
-       /* YandexPlacePicker.IntentBuilder builder = new YandexPlacePicker.IntentBuilder();
-        builder.setYandexMapsKey("AIzaSyDybP3bzvK6j6SGr14X_9HR__J30SZNdPY");
-        Intent placeIntent = builder.build(InputActivity.this);
-        startActivityForResult(placeIntent, PLACE_PICKER_REQUEST);*/
     }
 
 
@@ -268,45 +272,63 @@ public class InputActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri path = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
+                Ivphoto.setImageBitmap(bitmap);
+                Ivphoto.setVisibility(View.VISIBLE);
 
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (requestCode == CAMERA && resultCode == RESULT_OK && data != null) {
+            bitmap = (Bitmap) data.getExtras().get("data");
+            Ivphoto.setImageBitmap(bitmap);
+            Ivphoto.setVisibility(View.VISIBLE);
+
+        }
+
+/*
         if (resultCode == this.RESULT_CANCELED) {
             return;
         }
         if (requestCode == GALLERY) {
             if (data != null) {
-                Uri contentURI = data.getData();
+                //uri = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    *//*Bitmap bitmap;
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                     path = saveImage(bitmap);
-                    Toast.makeText(InputActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                    Ivphoto.setImageBitmap(bitmap);
+                    //Toast.makeText(InputActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+                    Ivphoto.setImageBitmap(bitmap);*//*
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(InputActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }
+
             }
         } else if (requestCode == CAMERA) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+           *//* Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             Ivphoto.setImageBitmap(thumbnail);
-            saveImage(thumbnail);
+            saveImage(thumbnail);*//*
             //Toast.makeText(InputActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
-    public String saveImage(Bitmap bitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File wallpaperDirectory = new File(
+    /*    public String saveImage(Bitmap bitmap) {
+     *//* ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+      File wallpaperDirectory = new File(
                 Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-        // have the object build the directory structure, if needed.
+                // have the object build the directory structure, if needed.
         if (!wallpaperDirectory.exists()) {
             wallpaperDirectory.mkdirs();
-        }
+        }*//*
         try {
-            String file = Calendar.getInstance().getTimeInMillis() + ".jpg";
-            namaFileGambar = file;
-            File f = new File(wallpaperDirectory, file);
+            *//*namaFileGambar = Calendar.getInstance().getTimeInMillis() + ".JPG";
+            f = new File(wallpaperDirectory, namaFileGambar);
 
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -318,20 +340,43 @@ public class InputActivity extends AppCompatActivity {
 
             Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
 
-            return f.getAbsolutePath();
+            filepath = f.getAbsolutePath();
+
+            return f.getAbsolutePath();*//*
+            //return "";
         } catch (IOException e1) {
             e1.printStackTrace();
         }
         return "";
+    }*/
+
+
+    private String imageToString() {
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                , System.currentTimeMillis() + ".JPG");
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(imgByte);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 
-
     private void requestSimpan() {
+
+        String laundry_pict = imageToString();
+
         mApiService.inputLaundryProfile(
                 userid,
                 location,
                 nama.getText().toString(),
-                namaFileGambar,
+                laundry_pict,
                 desc.getText().toString(),
                 phone.getText().toString(),
                 libur,
@@ -345,15 +390,22 @@ public class InputActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.i("debug", "OnResponse : Berhasil");
                     loading.dismiss();
+
                     try {
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         if (jsonObject.getString("error").equals("false")) {
-                            Toast.makeText(mContext, "Berhasil Input Data Laundry", Toast.LENGTH_SHORT).show();
-                            Integer laundryid = jsonObject.getJSONObject("data").getInt("id");
-                            Integer locationid = jsonObject.getJSONObject("data").getInt("laundry_locationid");
+
+                            Integer locationid = jsonObject.getJSONObject("laundry").getInt("laundry_locationid");
+                            Integer laundryid = jsonObject.getJSONObject("laundry").getInt("id");
 
                             sharedPrefManager.saveSPInt(SharedPrefManager.SP_LaundryId, laundryid);
                             sharedPrefManager.saveSPInt(SharedPrefManager.SP_LocationId, locationid);
+
+                            Log.i("debug", "Id Laundry" + laundryid);
+                            startActivity(new Intent(mContext, InputJadwalActivity.class));
+                            Toast.makeText(mContext, "Berhasil", Toast.LENGTH_SHORT).show();
+
+
                         } else {
                             String error = jsonObject.getString("error");
                             Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
@@ -363,6 +415,7 @@ public class InputActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 } else {
                     Log.i("debug", "OnResponse : Gagal");
                     Toast.makeText(mContext, "Gagal Input Data Laundry, Mohon Ulangi", Toast.LENGTH_SHORT).show();
@@ -374,9 +427,9 @@ public class InputActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("debug", "OnFailure : Error > " + t.getMessage());
                 Toast.makeText(mContext, "Koneksi Internet Bermasalah", Toast.LENGTH_SHORT).show();
+                loading.dismiss();
             }
         });
-
     }
 
     @Override
