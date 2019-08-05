@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -35,8 +34,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -53,30 +50,24 @@ public class InputActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageView backButton2;
     SharedPrefManager sharedPrefManager;
-
     Context mContext;
     BaseApiService mApiService;
     EditText nama, alamat, phone, desc, lat, lng;
     Double latEx, lngEX;
-    TextView tvPath, tvLatLaundry;
-
+    TextView tvLatLaundry;
     Spinner kecamatan;
-
     RadioGroup rglibur;
     RadioButton ya, tidak;
     Button simpan, openPhoto, bttampilMaps;
+    ImageView Ivphoto;
     Integer userid;
-    String libur = "0";
+    String libur;
     String location;
     String status = "1";
     Bitmap bitmap;
-    String namaFileGambar;
-    Uri image;
 
     public static final int IMG_REQUEST = 777;
 
-    private ImageView Ivphoto;
-    private static final String IMAGE_DIRECTORY = "/nyuciin";
     private int CAMERA = 2;
 
     ProgressDialog loading;
@@ -168,6 +159,7 @@ public class InputActivity extends AppCompatActivity {
 
         sharedPrefManager = new SharedPrefManager(InputActivity.this.getApplicationContext());
         userid = sharedPrefManager.getSP_UserId();
+        //sharedPrefManager.saveSPInt(SharedPrefManager.SP_LaundryId, 0);
 
 
         simpan.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +175,7 @@ public class InputActivity extends AppCompatActivity {
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InputActivity.this, MainActivity.class));
+                startActivity(new Intent(InputActivity.this, FasilitasActivity.class));
                 finish();
             }
         });
@@ -231,7 +223,6 @@ public class InputActivity extends AppCompatActivity {
                 switch (i) {
                     case 0:
                         selectImage();
-                        //choosePhotofromGallery();
                         break;
                     case 1:
                         takePhotofromCamera();
@@ -243,10 +234,6 @@ public class InputActivity extends AppCompatActivity {
     }
 
     public void selectImage() {
-        /*Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMG_REQUEST);*/
 
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -279,7 +266,6 @@ public class InputActivity extends AppCompatActivity {
                 Ivphoto.setImageBitmap(bitmap);
                 Ivphoto.setVisibility(View.VISIBLE);
 
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -289,88 +275,22 @@ public class InputActivity extends AppCompatActivity {
             Ivphoto.setVisibility(View.VISIBLE);
 
         }
-
-/*
-        if (resultCode == this.RESULT_CANCELED) {
-            return;
-        }
-        if (requestCode == GALLERY) {
-            if (data != null) {
-                //uri = data.getData();
-                try {
-                    *//*Bitmap bitmap;
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                    path = saveImage(bitmap);
-                    //Toast.makeText(InputActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                    Ivphoto.setImageBitmap(bitmap);*//*
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        } else if (requestCode == CAMERA) {
-           *//* Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            Ivphoto.setImageBitmap(thumbnail);
-            saveImage(thumbnail);*//*
-            //Toast.makeText(InputActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-        }*/
     }
 
-    /*    public String saveImage(Bitmap bitmap) {
-     *//* ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-      File wallpaperDirectory = new File(
-                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-                // have the object build the directory structure, if needed.
-        if (!wallpaperDirectory.exists()) {
-            wallpaperDirectory.mkdirs();
-        }*//*
-        try {
-            *//*namaFileGambar = Calendar.getInstance().getTimeInMillis() + ".JPG";
-            f = new File(wallpaperDirectory, namaFileGambar);
 
-            f.createNewFile();
-            FileOutputStream fo = new FileOutputStream(f);
-            fo.write(bytes.toByteArray());
-            MediaScannerConnection.scanFile(this,
-                    new String[]{f.getPath()},
-                    new String[]{"image/jpeg"}, null);
-            fo.close();
-
-            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
-
-            filepath = f.getAbsolutePath();
-
-            return f.getAbsolutePath();*//*
-            //return "";
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        return "";
-    }*/
-
-
-    private String imageToString() {
-        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                , System.currentTimeMillis() + ".JPG");
+    public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imgByte = byteArrayOutputStream.toByteArray();
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(imgByte);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Base64.encodeToString(imgByte, Base64.DEFAULT);
+
+        String imgString = Base64.encodeToString(imgByte, Base64.NO_WRAP);
+
+        return imgString;
     }
 
     private void requestSimpan() {
 
-        String laundry_pict = imageToString();
+        String laundry_pict = imageToString(bitmap);
 
         mApiService.inputLaundryProfile(
                 userid,
@@ -395,14 +315,14 @@ public class InputActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         if (jsonObject.getString("error").equals("false")) {
 
-                            Integer locationid = jsonObject.getJSONObject("laundry").getInt("laundry_locationid");
+                            //Integer locationid = jsonObject.getJSONObject("laundry").getInt("laundry_locationid");
                             Integer laundryid = jsonObject.getJSONObject("laundry").getInt("id");
 
                             sharedPrefManager.saveSPInt(SharedPrefManager.SP_LaundryId, laundryid);
-                            sharedPrefManager.saveSPInt(SharedPrefManager.SP_LocationId, locationid);
+                            //sharedPrefManager.saveSPInt(SharedPrefManager.SP_LocationId, locationid);
 
                             Log.i("debug", "Id Laundry" + laundryid);
-                            startActivity(new Intent(mContext, InputJadwalActivity.class));
+                            startActivity(new Intent(mContext, JadwalActivity.class));
                             Toast.makeText(mContext, "Berhasil", Toast.LENGTH_SHORT).show();
 
 
@@ -437,3 +357,37 @@ public class InputActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
+
+
+/*    public String saveImage(Bitmap bitmap) {
+ *//* ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+      File wallpaperDirectory = new File(
+                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
+                // have the object build the directory structure, if needed.
+        if (!wallpaperDirectory.exists()) {
+            wallpaperDirectory.mkdirs();
+        }*//*
+        try {
+            *//*namaFileGambar = Calendar.getInstance().getTimeInMillis() + ".JPG";
+            f = new File(wallpaperDirectory, namaFileGambar);
+
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+            MediaScannerConnection.scanFile(this,
+                    new String[]{f.getPath()},
+                    new String[]{"image/jpeg"}, null);
+            fo.close();
+
+            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
+
+            filepath = f.getAbsolutePath();
+
+            return f.getAbsolutePath();*//*
+            //return "";
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return "";
+    }*/

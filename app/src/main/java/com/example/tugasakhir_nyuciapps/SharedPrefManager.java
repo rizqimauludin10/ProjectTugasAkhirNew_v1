@@ -55,7 +55,7 @@ public class SharedPrefManager {
         return (int) sharedPreferences.getInt(String.valueOf(SP_UserId), 0);
     }
 
-    public int getSP_LaundryId() {
+    public Integer getSP_LaundryId() {
         return (int) sharedPreferences.getInt(String.valueOf(SP_LaundryId), 0);
     }
 

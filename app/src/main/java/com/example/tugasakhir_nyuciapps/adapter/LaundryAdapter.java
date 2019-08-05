@@ -66,8 +66,8 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
         holder.tvNamaLaundry.setText(semualaundryItem.getLaundryName());
         holder.tvDescLaundry.setText(semualaundryItem.getLaundryAddress());
         holder.tvLokasi.setText(semualaundryItem.getLocationName());
-        holder.harga.setText(semualaundryItem.getNyuciservicePrice());
-        holder.fasilitas.setText(semualaundryItem.getServiceName());
+        holder.harga.setText(semualaundryItem.getNyuciservicePricethree());
+
 
         //holder.jamBuka.setText(semualaundryItem.getNyucischeduleOpenHours());
 

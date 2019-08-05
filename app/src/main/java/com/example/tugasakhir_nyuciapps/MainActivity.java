@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -59,6 +60,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         sharedPrefManager = new SharedPrefManager(MainActivity.this.getApplicationContext());
+
+        //sharedPrefManager.saveSPInt(SharedPrefManager.SP_LaundryId, 0);
+
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);

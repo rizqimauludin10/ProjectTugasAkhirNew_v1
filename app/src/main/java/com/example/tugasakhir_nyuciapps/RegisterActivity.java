@@ -155,6 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Log.e("debug", "OnFailure : Error > " + t.getMessage());
                         Toast.makeText(mContext, "Koneksi Internet Bermasalah", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
 
                     }
                 });

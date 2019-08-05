@@ -77,21 +77,27 @@ public class Value {
     @Expose
     private String nyucischeduleNotes;
 
-    @SerializedName("service_name")
+    @SerializedName("nyuciservice_price_one")
     @Expose
-    private String serviceName;
-
-    @SerializedName("service_shortname")
+    private String nyuciservicePriceOne;
+    @SerializedName("nyuciservice_pricetwo")
     @Expose
-    private String serviceShortname;
-
-    @SerializedName("nyuciservice_price")
+    private String nyuciservicePricetwo;
+    @SerializedName("nyuciservice_pricethree")
     @Expose
-    private String nyuciservicePrice;
-
-    @SerializedName("nyuciservice_notes")
+    private String nyuciservicePricethree;
+    @SerializedName("nyuciservice_pricefour")
     @Expose
-    private String nyuciserviceNotes;
+    private String nyuciservicePricefour;
+    @SerializedName("nyuciservice_pricefive")
+    @Expose
+    private String nyuciservicePricefive;
+    @SerializedName("nyuciservice_pricesix")
+    @Expose
+    private String nyuciservicePricesix;
+    @SerializedName("nyuciservice_priceseven")
+    @Expose
+    private String nyuciservicePriceseven;
 
     @SerializedName("id")
     @Expose
@@ -229,36 +235,60 @@ public class Value {
         this.nyucischeduleNotes = nyucischeduleNotes;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public String getNyuciservicePriceOne() {
+        return nyuciservicePriceOne;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setNyuciservicePriceOne(String nyuciservicePriceOne) {
+        this.nyuciservicePriceOne = nyuciservicePriceOne;
     }
 
-    public String getServiceShortname() {
-        return serviceShortname;
+    public String getNyuciservicePricetwo() {
+        return nyuciservicePricetwo;
     }
 
-    public void setServiceShortname(String serviceShortname) {
-        this.serviceShortname = serviceShortname;
+    public void setNyuciservicePricetwo(String nyuciservicePricetwo) {
+        this.nyuciservicePricetwo = nyuciservicePricetwo;
     }
 
-    public String getNyuciservicePrice() {
-        return nyuciservicePrice;
+    public String getNyuciservicePricethree() {
+        return nyuciservicePricethree;
     }
 
-    public void setNyuciservicePrice(String nyuciservicePrice) {
-        this.nyuciservicePrice = nyuciservicePrice;
+    public void setNyuciservicePricethree(String nyuciservicePricethree) {
+        this.nyuciservicePricethree = nyuciservicePricethree;
     }
 
-    public String getNyuciserviceNotes() {
-        return nyuciserviceNotes;
+    public String getNyuciservicePricefour() {
+        return nyuciservicePricefour;
     }
 
-    public void setNyuciserviceNotes(String nyuciserviceNotes) {
-        this.nyuciserviceNotes = nyuciserviceNotes;
+    public void setNyuciservicePricefour(String nyuciservicePricefour) {
+        this.nyuciservicePricefour = nyuciservicePricefour;
+    }
+
+    public String getNyuciservicePricefive() {
+        return nyuciservicePricefive;
+    }
+
+    public void setNyuciservicePricefive(String nyuciservicePricefive) {
+        this.nyuciservicePricefive = nyuciservicePricefive;
+    }
+
+    public String getNyuciservicePricesix() {
+        return nyuciservicePricesix;
+    }
+
+    public void setNyuciservicePricesix(String nyuciservicePricesix) {
+        this.nyuciservicePricesix = nyuciservicePricesix;
+    }
+
+    public String getNyuciservicePriceseven() {
+        return nyuciservicePriceseven;
+    }
+
+    public void setNyuciservicePriceseven(String nyuciservicePriceseven) {
+        this.nyuciservicePriceseven = nyuciservicePriceseven;
     }
 
     public Integer getId() {

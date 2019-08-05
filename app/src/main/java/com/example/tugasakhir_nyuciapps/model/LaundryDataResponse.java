@@ -13,11 +13,11 @@ public class LaundryDataResponse {
     @SerializedName("values")
     private List<Value> values;
 
-    public String getMessage() {
+    public String getError() {
         return error;
     }
 
-    public void setMessage(String message) {
+    public void setError(String message) {
         this.error = message;
     }
 

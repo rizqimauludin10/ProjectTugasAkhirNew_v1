@@ -3,6 +3,8 @@ package com.example.tugasakhir_nyuciapps.apihelper;
 import com.example.tugasakhir_nyuciapps.model.LaundryDataResponse;
 import com.example.tugasakhir_nyuciapps.model.Value;
 
+import java.sql.Time;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -31,20 +33,6 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("laundry/")
     Call<ResponseBody> inputLaundryProfile(
-            /*@Part MultipartBody.Part laundry_pict,*/
-         /*   @Part("laundry_userid")  Integer laundry_userid,
-            @Part("laundry_locationid") String laundry_locationid,
-            @Part("laundry_name") String laundry_name,
-            @Part MultipartBody.Part laundry_pict,
-            @Part("laundry_desc") String laundry_desc,
-            @Part("laundry_phone") String laundry_phone,
-            @Part("laundry_is_holiday") String laundry_is_holiday,
-            @Part("laundry_address") String laundry_address,
-            @Part("laundry_address_lat") String laundry_address_lat,
-            @Part("laundry_address_lng") String laundry_address_lng,
-            @Part("laundry_status") String laundry_status*/
-
-
             @Field("laundry_userid") Integer laundry_userid,
             @Field("laundry_locationid") String laundry_locationid,
             @Field("laundry_name") String laundry_name,
@@ -63,11 +51,27 @@ public interface BaseApiService {
 
     @FormUrlEncoded
     @POST("sch/")
-    Call<ResponseBody> schedule(
+    Call<ResponseBody> jadwal(
             @Field("nyucischedule_laundryid") Integer nyucischedule_laundryid,
             @Field("nyucischedule_day") String nyucischedule_day,
             @Field("nyucischedule_open_hours") String nyucischedule_open_hours,
             @Field("nyucischedule_close_hours") String nyucischedule_close_hours,
             @Field("nyucischedule_notes") String nyucischedule_notes
+    );
+
+    @FormUrlEncoded
+    @POST("service/")
+    Call<ResponseBody> service(
+            @Field("nyuciservice_laundryid") Integer nyuciservice_laundryid,
+            @Field("nyuciservice_serviceid") Integer nyuciservice_serviceid,
+            @Field("nyuciservice_price_one") Integer nyuciservice_price_one,
+            @Field("nyuciservice_pricetwo") Integer nyuciservice_pricetwo,
+            @Field("nyuciservice_pricethree") Integer nyuciservice_pricethree,
+            @Field("nyuciservice_pricefour") Integer nyuciservice_pricefour,
+            @Field("nyuciservice_pricefive") Integer nyuciservice_pricefive,
+            @Field("nyuciservice_pricesix") Integer nyuciservice_pricesix,
+            @Field("nyuciservice_priceseven") Integer nyuciservice_priceseven,
+            @Field("nyuciservice_notes") Integer nyuciservice_notes,
+            @Field("nyuciservice_status") Integer nyuciservice_status
     );
 }
