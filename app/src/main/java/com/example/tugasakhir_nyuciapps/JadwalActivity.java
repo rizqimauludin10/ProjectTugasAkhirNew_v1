@@ -111,7 +111,7 @@ public class JadwalActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("debug", "OnResponse : Berhasil");
                     //loading.dismiss();
-                    startActivity(new Intent(JadwalActivity.this, MainActivity.class));
+                    startActivity(new Intent(JadwalActivity.this, FasilitasActivity.class));
                     finish();
 
                 } else {
@@ -124,6 +124,7 @@ public class JadwalActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Koneksi Internet Bermasalah", Toast.LENGTH_SHORT).show();
+                //loading.dismiss();
 
             }
         });

@@ -63,7 +63,7 @@ public class InputActivity extends AppCompatActivity {
     Integer userid;
     String libur;
     String location;
-    String status = "1";
+    String status = "0";
     Bitmap bitmap;
 
     public static final int IMG_REQUEST = 777;

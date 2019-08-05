@@ -37,7 +37,8 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
     List<Value> semuaLaundryList;
     Context context;
     String phone, alamat, name, lokasi, created_at, buka, tutup, liburHarian, namapemilik,
-            noHpPemilik;
+            noHpPemilik, photo;
+    String antar, parfum, biasa, kilat, setrika, sepatu, karpet;
     Integer tglmerah;
     String date1, date2;
     String path = "http://192.168.43.93:8000/images/";
@@ -88,6 +89,15 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
                 liburHarian = semualaundryItem.getNyucischeduleDay();
                 namapemilik = semualaundryItem.getName();
                 noHpPemilik = semualaundryItem.getLaundryPhone();
+                antar = semualaundryItem.getNyuciservicePriceOne();
+                parfum = semualaundryItem.getNyuciservicePricetwo();
+                biasa = semualaundryItem.getNyuciservicePricethree();
+                kilat = semualaundryItem.getNyuciservicePricefour();
+                setrika = semualaundryItem.getNyuciservicePricefive();
+                sepatu = semualaundryItem.getNyuciservicePricesix();
+                karpet = semualaundryItem.getNyuciservicePriceseven();
+                photo = semualaundryItem.getLaundryPict();
+
 
 
                 intent.putExtra("name", name);
@@ -101,6 +111,15 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
                 intent.putExtra("liburharian", liburHarian);
                 intent.putExtra("namapemilik", namapemilik);
                 intent.putExtra("nohppemilik", noHpPemilik);
+                intent.putExtra("antar", antar);
+                intent.putExtra("parfum", parfum);
+                intent.putExtra("biasa", biasa);
+                intent.putExtra("kilat", kilat);
+                intent.putExtra("setrika", setrika);
+                intent.putExtra("sepatu", sepatu);
+                intent.putExtra("karpet", karpet);
+                intent.putExtra("photo", photo);
+
 
                 context.startActivity(intent);
             }

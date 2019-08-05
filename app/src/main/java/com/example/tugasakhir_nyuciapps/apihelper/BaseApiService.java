@@ -63,15 +63,15 @@ public interface BaseApiService {
     @POST("service/")
     Call<ResponseBody> service(
             @Field("nyuciservice_laundryid") Integer nyuciservice_laundryid,
-            @Field("nyuciservice_serviceid") Integer nyuciservice_serviceid,
-            @Field("nyuciservice_price_one") Integer nyuciservice_price_one,
-            @Field("nyuciservice_pricetwo") Integer nyuciservice_pricetwo,
-            @Field("nyuciservice_pricethree") Integer nyuciservice_pricethree,
-            @Field("nyuciservice_pricefour") Integer nyuciservice_pricefour,
-            @Field("nyuciservice_pricefive") Integer nyuciservice_pricefive,
-            @Field("nyuciservice_pricesix") Integer nyuciservice_pricesix,
-            @Field("nyuciservice_priceseven") Integer nyuciservice_priceseven,
-            @Field("nyuciservice_notes") Integer nyuciservice_notes,
-            @Field("nyuciservice_status") Integer nyuciservice_status
+            @Field("nyuciservice_serviceid") String nyuciservice_serviceid,
+            @Field("nyuciservice_price_one") String nyuciservice_price_one,
+            @Field("nyuciservice_pricetwo") String nyuciservice_pricetwo,
+            @Field("nyuciservice_pricethree") String nyuciservice_pricethree,
+            @Field("nyuciservice_pricefour") String nyuciservice_pricefour,
+            @Field("nyuciservice_pricefive") String nyuciservice_pricefive,
+            @Field("nyuciservice_pricesix") String nyuciservice_pricesix,
+            @Field("nyuciservice_priceseven") String nyuciservice_priceseven,
+            @Field("nyuciservice_notes") String nyuciservice_notes,
+            @Field("nyuciservice_status") String nyuciservice_status
     );
 }

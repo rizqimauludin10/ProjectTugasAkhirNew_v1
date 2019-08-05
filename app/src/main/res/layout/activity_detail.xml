@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context=".DetailActivity">
 
     <!--<include
@@ -23,26 +22,27 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/ivPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:src="@drawable/teslaundry"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/teslaundry" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="20dp"
                 android:paddingLeft="20dp"
+                android:paddingTop="20dp"
                 android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/statusbuka"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Buka"
                     android:textSize="16sp"
-                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     tools:ignore="MissingPrefix" />
 
                 <ImageView
@@ -55,11 +55,11 @@
 
                 <TextView
                     android:id="@+id/alamatLaundry"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Alamat"
                     android:textSize="16sp"
-                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     tools:ignore="MissingPrefix" />
             </LinearLayout>
 
@@ -72,25 +72,25 @@
 
                 <TextView
                     android:id="@+id/tvNamaLaundry"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nama Laundry"
-                    android:maxLength="15"
-                    android:textSize="22sp"
-                    android:textColor="@color/username"
                     android:layout_marginRight="5dp"
-                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                    android:maxLength="15"
+                    android:text="Nama Laundry"
+                    android:textColor="@color/username"
+                    android:textSize="22sp"
                     tools:ignore="MissingPrefix" />
 
                 <TextView
                     android:id="@+id/tvLokasi"
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lokasi"
                     android:maxLength="20"
-                    android:textSize="22sp"
+                    android:text="Lokasi"
                     android:textColor="@color/username"
-                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                    android:textSize="22sp"
                     tools:ignore="MissingPrefix" />
 
             </LinearLayout>
@@ -99,8 +99,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="20dp">
+                android:paddingLeft="20dp"
+                android:paddingBottom="20dp">
 
                 <ImageView
                     android:layout_width="18dp"
@@ -110,12 +110,12 @@
 
                 <TextView
                     android:id="@+id/tvCreatedAt"
+                    fontPath="font/TitilliumWeb-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Update"
                     android:maxLength="16"
+                    android:text="Update"
                     android:textSize="14sp"
-                    fontPath="font/TitilliumWeb-Regular.ttf"
                     tools:ignore="MissingPrefix" />
 
             </LinearLayout>
@@ -137,42 +137,42 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
-                    android:orientation="horizontal">
+                    android:paddingBottom="20dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_access_time_black_24dp"
-                        android:layout_marginRight="5dp" />
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_access_time_black_24dp" />
 
                     <TextView
                         android:id="@+id/jamBuka"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Buka"
                         android:maxLength="5"
+                        android:text="Buka"
                         android:textSize="16sp"
-                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         tools:ignore="MissingPrefix" />
 
                     <TextView
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
                         android:text="-"
-                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        android:textSize="16sp"
                         tools:ignore="MissingPrefix" />
 
                     <TextView
                         android:id="@+id/jamTutup"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tutup"
                         android:maxLength="5"
+                        android:text="Tutup"
                         android:textSize="16sp"
-                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         tools:ignore="MissingPrefix" />
 
                 </LinearLayout>
@@ -192,32 +192,32 @@
                 android:padding="20dp">
 
                 <TextView
+                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Operasional"
                     android:textSize="20sp"
-                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                     tools:ignore="MissingPrefix" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/ivLiburTanggalMerah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_check_circle_black_24dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_check_circle_black_24dp" />
 
                     <TextView
+                        fontPath="font/TitilliumWeb-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Libur Tanggal Merah"
                         android:textSize="16sp"
-                        fontPath="font/TitilliumWeb-Regular.ttf"
                         tools:ignore="MissingPrefix" />
 
                 </LinearLayout>
@@ -225,32 +225,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/ivHarian"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_check_circle_black_24dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_check_circle_black_24dp" />
 
                     <TextView
+                        fontPath="font/TitilliumWeb-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text="Libur Harian,"
                         android:textSize="16sp"
-                        android:layout_marginRight="10dp"
-                        fontPath="font/TitilliumWeb-Regular.ttf"
                         tools:ignore="MissingPrefix" />
 
                     <TextView
                         android:id="@+id/tvLiburHarian"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hari"
                         android:textSize="16sp"
-                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         tools:ignore="MissingPrefix" />
 
                 </LinearLayout>
@@ -259,16 +259,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Fasilitas"
                         android:textSize="20sp"
-                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         tools:ignore="MissingPrefix" />
 
                     <HorizontalScrollView
@@ -279,8 +279,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="20dp">
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -290,18 +290,31 @@
                                     android:id="@+id/iconfasil1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_cancel_black_24dp"
-                                    android:layout_centerHorizontal="true" />
-
-                                <TextView
                                     android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_cancel_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvcuci"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Cuci Biasa"
-                                    android:layout_marginRight="30dp"
                                     android:layout_below="@id/iconfasil1"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginRight="30dp"
+                                    android:text="Cuci Biasa"
                                     android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
+
+                                <TextView
+                                    android:id="@+id/hargabiasa"
                                     fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvcuci"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Harga"
+                                    android:textColor="@color/username"
+                                    android:textSize="16sp"
                                     tools:ignore="MissingPrefix" />
 
                             </RelativeLayout>
@@ -310,13 +323,35 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <TextView
+                                <ImageView
+                                    android:id="@+id/iconfasil2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_cancel_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvkilat"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/iconfasil2"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginRight="30dp"
                                     android:text="Cuci Kilat"
-                                    android:layout_marginRight="30dp"
                                     android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
+
+                                <TextView
+                                    android:id="@+id/hargakilat"
                                     fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvkilat"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Harga"
+                                    android:textColor="@color/username"
+                                    android:textSize="16sp"
                                     tools:ignore="MissingPrefix" />
 
                             </RelativeLayout>
@@ -325,13 +360,35 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <TextView
+                                <ImageView
+                                    android:id="@+id/iconfasil3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_cancel_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvsetrika"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/iconfasil3"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginRight="30dp"
                                     android:text="Setrika"
-                                    android:layout_marginRight="30dp"
                                     android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
+
+                                <TextView
+                                    android:id="@+id/hargasetrika"
                                     fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvsetrika"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Harga"
+                                    android:textColor="@color/username"
+                                    android:textSize="16sp"
                                     tools:ignore="MissingPrefix" />
 
                             </RelativeLayout>
@@ -340,13 +397,35 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <TextView
+                                <ImageView
+                                    android:id="@+id/iconfasil4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_cancel_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvsepatu"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/iconfasil4"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginRight="30dp"
                                     android:text="Cuci Sepatu"
-                                    android:layout_marginRight="30dp"
                                     android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
+
+                                <TextView
+                                    android:id="@+id/hargasepatu"
                                     fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvsepatu"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Harga"
+                                    android:textColor="@color/username"
+                                    android:textSize="16sp"
                                     tools:ignore="MissingPrefix" />
 
                             </RelativeLayout>
@@ -355,13 +434,35 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <TextView
+                                <ImageView
+                                    android:id="@+id/iconfasil5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_cancel_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvkarpet"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/iconfasil5"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginRight="30dp"
                                     android:text="Cuci Karpet"
-                                    android:layout_marginRight="30dp"
                                     android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
+
+                                <TextView
+                                    android:id="@+id/hargakarpet"
                                     fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvkarpet"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Harga"
+                                    android:textColor="@color/username"
+                                    android:textSize="16sp"
                                     tools:ignore="MissingPrefix" />
 
                             </RelativeLayout>
@@ -370,13 +471,35 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <TextView
+                                <ImageView
+                                    android:id="@+id/iconfasil6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_cancel_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvantar"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/iconfasil6"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginRight="30dp"
                                     android:text="Antar Jemput"
-                                    android:layout_marginRight="30dp"
                                     android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
+
+                                <TextView
+                                    android:id="@+id/hargaantar"
                                     fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvantar"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Harga"
+                                    android:textColor="@color/username"
+                                    android:textSize="16sp"
                                     tools:ignore="MissingPrefix" />
 
                             </RelativeLayout>
@@ -385,18 +508,38 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <TextView
+                                <ImageView
+                                    android:id="@+id/iconfasil7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Pilihan Parfum"
-                                    android:layout_marginRight="30dp"
-                                    android:textSize="16sp"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_cancel_black_24dp" />
+
+                                <TextView
+                                    android:id="@+id/tvparfum"
                                     fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/iconfasil7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginRight="30dp"
+                                    android:text="Pilihan Parfum"
+                                    android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
+
+                                <TextView
+                                    android:id="@+id/hargaparfum"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvparfum"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Harga"
+                                    android:textColor="@color/username"
+                                    android:textSize="16sp"
                                     tools:ignore="MissingPrefix" />
                             </RelativeLayout>
-
                         </LinearLayout>
-
                     </HorizontalScrollView>
 
                 </LinearLayout>
@@ -410,17 +553,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:layout_marginBottom="20dp"
                         android:text="Data bisa berubah sewaktu waktu tanyakan data saat ini"
-                        fontPath="font/TitilliumWeb-SemiBold.ttf"
-                        tools:ignore="MissingPrefix"
-                        android:layout_marginBottom="20dp" />
+                        android:textSize="16sp"
+                        tools:ignore="MissingPrefix" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -430,8 +573,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/whatsapp"
-                            android:layout_marginRight="10dp" />
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/whatsapp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -439,46 +582,46 @@
                             android:orientation="vertical">
 
                             <TextView
+                                fontPath="font/TitilliumWeb-SemiBold.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pemilik Laundry"
-                                fontPath="font/TitilliumWeb-SemiBold.ttf"
-                                tools:ignore="MissingPrefix"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                tools:ignore="MissingPrefix" />
 
                             <TextView
                                 android:id="@+id/tvNamaPemilik"
+                                fontPath="font/TitilliumWeb-SemiBold.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
                                 android:text="Nama Pemilik Laundry"
-                                fontPath="font/TitilliumWeb-SemiBold.ttf"
-                                tools:ignore="MissingPrefix"
                                 android:textSize="16sp"
-                                android:layout_marginTop="5dp" />
+                                tools:ignore="MissingPrefix" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="5dp">
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/tvNomorPemilik"
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:maxLength="6"
                                     android:text="08968519"
-                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
-                                    tools:ignore="MissingPrefix"
                                     android:textSize="16sp"
-                                    android:maxLength="6" />
+                                    tools:ignore="MissingPrefix" />
 
                                 <TextView
+                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="xxxxxx"
-                                    fontPath="font/TitilliumWeb-SemiBold.ttf"
-                                    tools:ignore="MissingPrefix"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="MissingPrefix" />
 
                             </LinearLayout>
 
@@ -490,16 +633,16 @@
 
                     <Button
                         android:id="@+id/hubungiPemilik"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:background="@drawable/btn_hubungi"
                         android:text="Hubungi Pemilik Jasa"
-                        android:textColor="@color/white"
-                        fontPath="font/TitilliumWeb-SemiBold.ttf"
-                        tools:ignore="MissingPrefix"
                         android:textAllCaps="false"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
-                        android:background="@drawable/btn_hubungi" />
+                        tools:ignore="MissingPrefix" />
 
                 </LinearLayout>
 

@@ -199,7 +199,7 @@
                     fontPath="font/TitilliumWeb-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pilihan Parfum"
+                    android:text="Cuci Kilat"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -214,6 +214,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/cucikilat"
                         fontPath="font/TitilliumWeb-Bold.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -251,13 +252,12 @@
                     fontPath="font/TitilliumWeb-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pilihan Parfum"
+                    android:text="Setrika"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     tools:ignore="MissingPrefix" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -266,6 +266,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/setrika"
                         fontPath="font/TitilliumWeb-Bold.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -303,7 +304,7 @@
                     fontPath="font/TitilliumWeb-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pilihan Parfum"
+                    android:text="Sepatu"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -318,6 +319,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/sepatu"
                         fontPath="font/TitilliumWeb-Bold.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -356,7 +358,7 @@
                     fontPath="font/TitilliumWeb-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pilihan Parfum"
+                    android:text="Karpet"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -371,6 +373,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/karpet"
                         fontPath="font/TitilliumWeb-Bold.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -384,6 +387,26 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <Button
+                android:id="@+id/btfasilitas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selesai"
+                android:background="@drawable/ripple_effect"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                fontPath="font/TitilliumWeb-Bold.ttf"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                tools:ignore="MissingPrefix" />
+        </RelativeLayout>
 
     </LinearLayout>
 </ScrollView>

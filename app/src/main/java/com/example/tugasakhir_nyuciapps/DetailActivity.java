@@ -11,15 +11,20 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.squareup.picasso.Picasso;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class DetailActivity extends AppCompatActivity {
 
-    String namaEx, alamatEx, lokasiEx, createdEX, bukaEX, tutupEx, liburHarianEx, namaPemilikEx, nomorPemilikEx;
+    String namaEx, alamatEx, lokasiEx, createdEX, bukaEX, tutupEx, liburHarianEx, namaPemilikEx, nomorPemilikEx, photoEx;
     Integer tglmerahiconEx;
     TextView nama, alamat, lokasi, created, buka, tutup, liburHarian, tvNamaPemilik, tvNomorPemilik;
-    ImageView tglmerah, ivHarian;
+    TextView biasa, kilat, setrika, sepatu, karpet, antar, parfum;
+    String biasaEx, kilatEx, setrikaEx, sepatuEx, karpetEx, antarEx, parfumEx;
+    ImageView tglmerah, ivHarian, photo;
     Button hubungiPemilik;
+    String path = "http://192.168.43.93:8000/images/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,15 @@ public class DetailActivity extends AppCompatActivity {
         tvNamaPemilik = (TextView) findViewById(R.id.tvNamaPemilik);
         tvNomorPemilik = (TextView) findViewById(R.id.tvNomorPemilik);
         hubungiPemilik = (Button) findViewById(R.id.hubungiPemilik);
+        biasa = (TextView) findViewById(R.id.hargabiasa);
+        kilat = (TextView) findViewById(R.id.hargakilat);
+        setrika = (TextView) findViewById(R.id.hargasetrika);
+        sepatu = (TextView) findViewById(R.id.hargasepatu);
+        karpet = (TextView) findViewById(R.id.hargakarpet);
+        antar = (TextView) findViewById(R.id.hargaantar);
+        parfum = (TextView) findViewById(R.id.hargaparfum);
+        photo = (ImageView) findViewById(R.id.ivPhoto);
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -80,6 +94,32 @@ public class DetailActivity extends AppCompatActivity {
 
             nomorPemilikEx = extras.getString("nohppemilik");
             tvNomorPemilik.setText(nomorPemilikEx);
+
+            biasaEx = extras.getString("biasa");
+            biasa.setText(biasaEx);
+
+            kilatEx = extras.getString("kilat");
+            kilat.setText(kilatEx);
+
+            setrikaEx = extras.getString("setrika");
+            setrika.setText(setrikaEx);
+
+            sepatuEx = extras.getString("sepatu");
+            sepatu.setText(sepatuEx);
+
+            karpetEx = extras.getString("karpet");
+            karpet.setText(karpetEx);
+
+            antarEx = extras.getString("antar");
+            antar.setText(antarEx);
+
+            parfumEx = extras.getString("parfum");
+            parfum.setText(parfumEx);
+
+            photoEx = extras.getString("photo");
+            Picasso.get().load(path + photoEx).into(photo);
+
+
 
             hubungiPemilik.setOnClickListener(new View.OnClickListener() {
                 @Override
