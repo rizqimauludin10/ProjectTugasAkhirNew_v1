@@ -11,34 +11,30 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tugasakhir_nyuciapps.DetailActivity;
-import com.example.tugasakhir_nyuciapps.MainActivity;
 import com.example.tugasakhir_nyuciapps.R;
 import com.example.tugasakhir_nyuciapps.model.Value;
 import com.squareup.picasso.Picasso;
 
-import java.security.PublicKey;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryHolder> {
     List<Value> semuaLaundryList;
     Context context;
     String phone, alamat, name, lokasi, created_at, buka, tutup, liburHarian, namapemilik,
-            noHpPemilik, photo;
+            noHpPemilik, photo, jb, jt;
     String antar, parfum, biasa, kilat, setrika, sepatu, karpet;
+    String status;
     Integer tglmerah;
     String date1, date2;
     String path = "http://192.168.43.93:8000/images/";
@@ -47,8 +43,8 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
     public LaundryAdapter(Context context, List<Value> laundryList) {
         this.context = context;
         this.semuaLaundryList = laundryList;
-
     }
+
 
     @NonNull
     @Override
@@ -78,6 +74,7 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
                 //Toast.makeText(view.getContext(),"Welcome" + name, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, DetailActivity.class);
 
+                status = semualaundryItem.getLaundryStatus();
                 name = semualaundryItem.getLaundryName();
                 alamat = semualaundryItem.getLaundryAddress();
                 phone = semualaundryItem.getLaundryPhone();
@@ -97,9 +94,6 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
                 sepatu = semualaundryItem.getNyuciservicePricesix();
                 karpet = semualaundryItem.getNyuciservicePriceseven();
                 photo = semualaundryItem.getLaundryPict();
-
-
-
                 intent.putExtra("name", name);
                 intent.putExtra("alamat", alamat);
                 intent.putExtra("phone", phone);
@@ -107,6 +101,8 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
                 intent.putExtra("created_at", created_at);
                 intent.putExtra("buka", buka);
                 intent.putExtra("tutup", tutup);
+
+
                 intent.putExtra("tglmerah", tglmerah);
                 intent.putExtra("liburharian", liburHarian);
                 intent.putExtra("namapemilik", namapemilik);
@@ -120,12 +116,33 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
                 intent.putExtra("karpet", karpet);
                 intent.putExtra("photo", photo);
 
-
                 context.startActivity(intent);
+
+                //Kondisi Buka dan Tutup
+                Calendar now = Calendar.getInstance();
+
+                int hour = now.get(Calendar.HOUR_OF_DAY); // Get hour in 24 hour format
+                int minute = now.get(Calendar.MINUTE);
+
+                Date date = parseDate(hour + ":" + minute);
+                Date dateCompareOne = parseDate(date1);
+                Date dateCompareTwo = parseDate(date2);
+
+                if (dateCompareOne.before(date) && dateCompareTwo.after(date)) {
+                    jb = "Buka";
+                    intent.putExtra("stbuka", jb);
+                    holder.jamBuka.setTextColor(Color.parseColor("#13476A"));
+                    Log.d("Operasional", "Open");
+                } else {
+                    jt = "Tutup";
+                    intent.putExtra("stbuka", jt);
+                    holder.jamBuka.setTextColor(Color.parseColor("#EE2727"));
+                    Log.d("Operasional", "Close");
+                }
+
+
             }
         });
-
-
 
 
         date1 = semualaundryItem.getNyucischeduleOpenHours();
@@ -176,7 +193,6 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
         public TextView tvDescLaundry, tvLokasi, rp, harga, kg, jamBuka;
         public ImageView IvLaundry;
         public LinearLayout itemClick;
-
 
 
         public LaundryHolder(@NonNull View itemView) {

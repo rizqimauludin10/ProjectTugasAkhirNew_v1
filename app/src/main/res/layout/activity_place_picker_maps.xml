@@ -18,27 +18,40 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
-        <TextView
-            android:id="@+id/dragg_result"
-            fontPath="font/TitilliumWeb-SemiBold.ttf"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:padding="20dp"
-            android:text="Please drag map to your address.."
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            tools:ignore="MissingPrefix" />
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/alamat" />
+
+            <TextView
+                android:id="@+id/dragg_result"
+                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Please drag map to your address.."
+                android:textColor="@color/username"
+                android:textSize="14dp"
+                tools:ignore="MissingPrefix" />
+
+        </FrameLayout>
+
 
     </RelativeLayout>
 
 
     <ImageView
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/mapsicon"
+        android:src="@drawable/marker"
         android:text="TextView" />
 
     <RelativeLayout

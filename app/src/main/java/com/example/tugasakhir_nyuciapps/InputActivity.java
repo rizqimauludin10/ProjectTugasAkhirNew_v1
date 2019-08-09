@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.service.autofill.Validator;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -27,8 +28,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
 import com.example.tugasakhir_nyuciapps.apihelper.UtilsApi;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,10 +54,13 @@ public class InputActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageView backButton2;
     SharedPrefManager sharedPrefManager;
+    SharedPrefManager sharedPrefManager1;
     Context mContext;
     BaseApiService mApiService;
     EditText nama, alamat, phone, desc, lat, lng;
+    TextInputLayout input, descinput, alamatinput, latinput, lnginput, hpinput;
     Double latEx, lngEX;
+    String namaEx, alamatEx, phoneEx, kecEx, descEx;
     TextView tvLatLaundry;
     Spinner kecamatan;
     RadioGroup rglibur;
@@ -65,6 +72,8 @@ public class InputActivity extends AppCompatActivity {
     String location;
     String status = "0";
     Bitmap bitmap;
+    String vnama;
+    private AwesomeValidation awesomeValidation;
 
     public static final int IMG_REQUEST = 777;
 
@@ -85,6 +94,10 @@ public class InputActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+
+        sharedPrefManager = new SharedPrefManager(InputActivity.this.getApplicationContext());
+        userid = sharedPrefManager.getSP_UserId();
+        Log.e("debug", "Shared Preference LaundryId Input> " + userid);
 
 
         mContext = this;
@@ -110,6 +123,15 @@ public class InputActivity extends AppCompatActivity {
         lng = (EditText) findViewById(R.id.LngLaundry);
         tvLatLaundry = (TextView) findViewById(R.id.ketLat);
         bttampilMaps = (Button) findViewById(R.id.tampilMaps);
+        input = (TextInputLayout) findViewById(R.id.layoutinput);
+        descinput = (TextInputLayout) findViewById(R.id.descinput);
+        alamatinput = (TextInputLayout) findViewById(R.id.inputalamat);
+        hpinput = (TextInputLayout) findViewById(R.id.inputHp);
+        latinput = (TextInputLayout) findViewById(R.id.inputlat);
+        lnginput = (TextInputLayout) findViewById(R.id.inputlng);
+
+        //awesomeValidation= new AwesomeValidation(ValidationStyle.BASIC);
+        //awesomeValidation.addValidation(this, R.id.namaLaundry, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -118,7 +140,22 @@ public class InputActivity extends AppCompatActivity {
             lat.setText("" + latEx);
             lng.setText("" + lngEX);
 
+            namaEx = extras.getString("nama");
+            nama.setText(namaEx);
+
+            alamatEx = extras.getString("alamat");
+            alamat.setText(alamatEx);
+
+            phoneEx = extras.getString("phone");
+            phone.setText(phoneEx);
+
+            /*kecEx = extras.getString("kec");
+            kecamatan.getSelectedItem().toString();*/
+
+            descEx = extras.getString("desc");
+            desc.setText(descEx);
         }
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnerlist, kecamatanlist);
 
@@ -157,16 +194,14 @@ public class InputActivity extends AppCompatActivity {
         });
 
 
-        sharedPrefManager = new SharedPrefManager(InputActivity.this.getApplicationContext());
-        userid = sharedPrefManager.getSP_UserId();
-        //sharedPrefManager.saveSPInt(SharedPrefManager.SP_LaundryId, 0);
+
 
 
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
-                requestSimpan();
+                submitForm();
+
 
 
             }
@@ -251,6 +286,11 @@ public class InputActivity extends AppCompatActivity {
 
     private void showPlacePicker() {
         Intent intent = new Intent(InputActivity.this, PlacePickerMapsActivity.class);
+        intent.putExtra("nama", nama.getText().toString());
+        intent.putExtra("desc", desc.getText().toString());
+        intent.putExtra("phone", phone.getText().toString());
+        intent.putExtra("alamat", alamat.getText().toString());
+        intent.putExtra("kec", kecamatan.getSelectedItem().toString());
         startActivity(intent);
     }
 
@@ -277,7 +317,6 @@ public class InputActivity extends AppCompatActivity {
         }
     }
 
-
     public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -289,14 +328,12 @@ public class InputActivity extends AppCompatActivity {
     }
 
     private void requestSimpan() {
-
         String laundry_pict = imageToString(bitmap);
-
         mApiService.inputLaundryProfile(
                 userid,
                 location,
-                nama.getText().toString(),
                 laundry_pict,
+                nama.getText().toString(),
                 desc.getText().toString(),
                 phone.getText().toString(),
                 libur,
@@ -315,11 +352,9 @@ public class InputActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         if (jsonObject.getString("error").equals("false")) {
 
-                            //Integer locationid = jsonObject.getJSONObject("laundry").getInt("laundry_locationid");
                             Integer laundryid = jsonObject.getJSONObject("laundry").getInt("id");
 
                             sharedPrefManager.saveSPInt(SharedPrefManager.SP_LaundryId, laundryid);
-                            //sharedPrefManager.saveSPInt(SharedPrefManager.SP_LocationId, locationid);
 
                             Log.i("debug", "Id Laundry" + laundryid);
                             startActivity(new Intent(mContext, JadwalActivity.class));
@@ -356,6 +391,26 @@ public class InputActivity extends AppCompatActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
+    private void submitForm() {
+
+        if (nama.length() == 0) {
+            input.setError("Masukkan nama");
+        } else if (desc.length() == 0) {
+            descinput.setError("Masukkan deskripsi");
+        } else if (alamat.length() == 0) {
+            alamatinput.setError("Masukkan alamat");
+        } else if (phone.length() == 0) {
+            hpinput.setError("Masukkan Nomor Handphone");
+        } else if (lat.length() == 0 && lng.length() == 0) {
+            latinput.setError("Tekan Tombol Ubah Lokasi");
+            lnginput.setError("Tekan Tombol Ubah Lokasi");
+        } else {
+            loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
+            requestSimpan();
+        }
+    }
+
 }
 
 

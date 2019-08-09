@@ -2,6 +2,7 @@ package com.example.tugasakhir_nyuciapps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +18,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class DetailActivity extends AppCompatActivity {
 
-    String namaEx, alamatEx, lokasiEx, createdEX, bukaEX, tutupEx, liburHarianEx, namaPemilikEx, nomorPemilikEx, photoEx;
+    String namaEx, alamatEx, lokasiEx, createdEX, bukaEX, tutupEx, liburHarianEx, namaPemilikEx, nomorPemilikEx, photoEx, statusBukaEx;
     Integer tglmerahiconEx;
-    TextView nama, alamat, lokasi, created, buka, tutup, liburHarian, tvNamaPemilik, tvNomorPemilik;
+    TextView nama, alamat, lokasi, created, buka, tutup, liburHarian, tvNamaPemilik, tvNomorPemilik, statusBuka;
     TextView biasa, kilat, setrika, sepatu, karpet, antar, parfum;
     String biasaEx, kilatEx, setrikaEx, sepatuEx, karpetEx, antarEx, parfumEx;
     ImageView tglmerah, ivHarian, photo;
@@ -51,10 +52,23 @@ public class DetailActivity extends AppCompatActivity {
         antar = (TextView) findViewById(R.id.hargaantar);
         parfum = (TextView) findViewById(R.id.hargaparfum);
         photo = (ImageView) findViewById(R.id.ivPhoto);
+        statusBuka = (TextView) findViewById(R.id.statusbuka);
 
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            statusBukaEx = extras.getString("stbuka");
+
+
+            if (statusBukaEx == "Buka") {
+                statusBuka.setText("Buka");
+                statusBuka.setTextColor(Color.parseColor("#13476A"));
+            } else {
+                statusBuka.setText("Tutup");
+                statusBuka.setTextColor(Color.parseColor("#EE2727"));
+
+            }
+
             namaEx = extras.getString("name");
             nama.setText(namaEx);
 
@@ -125,7 +139,7 @@ public class DetailActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://api.whatsapp.com/send?phone=" + nomorPemilikEx + "&text=Saya%20perlu%20bantuan%Pemilik%20" + namaEx));
+                            Uri.parse("https://api.whatsapp.com/send?phone=" + nomorPemilikEx + "&text=Saya%20perlu%20bantuan%20Pemilik%20" + namaEx));
                     startActivity(intent);
                 }
             });

@@ -41,6 +41,8 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
     private final float DEFAULT_ZOOM = 15;
     private Location location;
     private double lat, lng;
+    String nama, alamat, phone, desc, kecamatan;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,14 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
 
         configureCameraIdle();
 
+        Bundle extras = getIntent().getExtras();
+        nama = extras.getString("nama");
+        desc = extras.getString("desc");
+        phone = extras.getString("phone");
+        kecamatan = extras.getString("kec");
+        alamat = extras.getString("alamat");
+
+
         getLokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,8 +78,15 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
                             public void run() {
                                 getLokasi.setEnabled(true);
                                 Intent intent = new Intent(PlacePickerMapsActivity.this, InputActivity.class);
+
                                 intent.putExtra("lat", lat);
                                 intent.putExtra("lng", lng);
+                                intent.putExtra("nama", nama);
+                                intent.putExtra("desc", desc);
+                                intent.putExtra("phone", phone);
+                                intent.putExtra("kec", kecamatan);
+                                intent.putExtra("alamat", alamat);
+
                                 startActivity(intent);
                             }
                         });

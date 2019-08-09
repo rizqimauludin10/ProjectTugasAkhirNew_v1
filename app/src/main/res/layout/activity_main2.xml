@@ -23,9 +23,9 @@
             <EditText
                 android:layout_gravity="center"
                 android:id="@+id/search_activity_search"
-                android:focusable="false"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
+                android:focusable="false"
                 android:background="@drawable/edittext_style"
                 android:paddingLeft="45dp"
                 android:hint=""

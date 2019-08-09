@@ -64,9 +64,11 @@
             android:paddingBottom="10dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutinput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextAppearance="@style/HintText">
+                app:hintTextAppearance="@style/HintText"
+                app:errorEnabled="true">
 
                 <EditText
                     android:id="@+id/namaLaundry"
@@ -111,9 +113,11 @@
             android:paddingBottom="10dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descinput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextAppearance="@style/HintText">
+                app:hintTextAppearance="@style/HintText"
+                app:errorEnabled="true">
 
                 <EditText
                     android:id="@+id/descLaundry"
@@ -167,7 +171,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextAppearance="@style/HintText">
+                app:hintTextAppearance="@style/HintText"
+                android:id="@+id/inputHp"
+                app:errorEnabled="true">
 
                 <EditText
                     android:id="@+id/nohpLaundry"
@@ -267,7 +273,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextAppearance="@style/HintText">
+                app:hintTextAppearance="@style/HintText"
+                app:errorEnabled="true"
+                android:id="@+id/inputalamat">
 
                 <EditText
                     android:id="@+id/alamatLaundry"
@@ -339,7 +347,9 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintTextAppearance="@style/HintText">
+                        app:hintTextAppearance="@style/HintText"
+                        app:errorEnabled="true"
+                        android:id="@+id/inputlat">
 
                         <EditText
                             android:id="@+id/LatLaundry"
@@ -400,7 +410,9 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintTextAppearance="@style/HintText">
+                        app:hintTextAppearance="@style/HintText"
+                        app:errorEnabled="true"
+                        android:id="@+id/inputlng">
 
                         <EditText
                             android:id="@+id/LngLaundry"
@@ -537,10 +549,10 @@
 
             <ImageView
                 android:id="@+id/photo"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@drawable/ic_add_a_photo_black_24dp"
-                android:scaleType="fitXY" />
+                android:layout_marginTop="10dp"
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop" />
 
             <Button
                 android:id="@+id/openCamera"
@@ -549,7 +561,7 @@
                 android:layout_below="@id/photo"
                 android:background="@drawable/ripple_effect"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:text="Pilih gambar"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

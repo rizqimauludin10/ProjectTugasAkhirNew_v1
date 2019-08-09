@@ -63,7 +63,6 @@ public interface BaseApiService {
     @POST("service/")
     Call<ResponseBody> service(
             @Field("nyuciservice_laundryid") Integer nyuciservice_laundryid,
-            @Field("nyuciservice_serviceid") String nyuciservice_serviceid,
             @Field("nyuciservice_price_one") String nyuciservice_price_one,
             @Field("nyuciservice_pricetwo") String nyuciservice_pricetwo,
             @Field("nyuciservice_pricethree") String nyuciservice_pricethree,
@@ -71,7 +70,8 @@ public interface BaseApiService {
             @Field("nyuciservice_pricefive") String nyuciservice_pricefive,
             @Field("nyuciservice_pricesix") String nyuciservice_pricesix,
             @Field("nyuciservice_priceseven") String nyuciservice_priceseven,
-            @Field("nyuciservice_notes") String nyuciservice_notes,
-            @Field("nyuciservice_status") String nyuciservice_status
+            @Field("nyuciservice_serviceid") String nyuciservice_serviceid,
+            @Field("nyuciservice_status") String nyuciservice_status,
+            @Field("nyuciservice_notes") String nyuciservice_notes
     );
 }

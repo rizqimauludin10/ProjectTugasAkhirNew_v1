@@ -39,7 +39,8 @@ public class FasilitasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fasilitas);
 
         sharedPrefManager = new SharedPrefManager(FasilitasActivity.this.getApplicationContext());
-        laundryid = sharedPrefManager.getSP_UserId();
+        Log.e("debug", "Shared Preference UserId Fasilitas> " + sharedPrefManager.getSP_UserId());
+        laundryid = sharedPrefManager.getSP_LaundryId();
 
         baseApiService = UtilsApi.getApiService();
 
@@ -67,7 +68,6 @@ public class FasilitasActivity extends AppCompatActivity {
     private void fasilitas() {
         baseApiService.service(
                 laundryid,
-                serviceid,
                 antar.getText().toString(),
                 parfum.getText().toString(),
                 biasa.getText().toString(),
@@ -75,8 +75,9 @@ public class FasilitasActivity extends AppCompatActivity {
                 setrika.getText().toString(),
                 sepatu.getText().toString(),
                 karpet.getText().toString(),
-                notes,
-                status
+                serviceid,
+                status,
+                notes
         ).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

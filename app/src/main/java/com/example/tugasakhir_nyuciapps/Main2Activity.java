@@ -3,21 +3,30 @@ package com.example.tugasakhir_nyuciapps;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.tugasakhir_nyuciapps.adapter.LaundryAdapter;
+import com.example.tugasakhir_nyuciapps.model.Value;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 public class Main2Activity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+    private EditText search;
     ImageView backbutton1;
 
     @Override
@@ -25,11 +34,14 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+
         tabLayout = (TabLayout) findViewById(R.id.tablayout_id);
         viewPager = (ViewPager) findViewById(R.id.viewpager_id);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         backbutton1 = (ImageView) findViewById(R.id.backbutton1);
+
+        search = (EditText) findViewById(R.id.search_activity_search);
 
         //addFragmentHere
         adapter.AddFragment(new MapsFragment(), "Lihat Peta");
@@ -48,8 +60,25 @@ public class Main2Activity extends AppCompatActivity {
 
         setCustomFont();
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
     }
+
 
     public void setCustomFont() {
         ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);

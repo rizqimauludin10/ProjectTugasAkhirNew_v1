@@ -45,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     BaseApiService mApiService;
     SharedPrefManager sharedPrefManager;
 
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         sharedPrefManager = new SharedPrefManager(this);
 
-        if (sharedPrefManager.getSPSudahLogin()) {
+        if (sharedPrefManager.getSPSudahLoginPemilik() || sharedPrefManager.getSPSudahLoginPencari()) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
@@ -93,8 +95,18 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
-                requestLogin();
+
+                if (etusername.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Masukkan alamat email", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (etusername.getText().toString().trim().matches(emailPattern)) {
+                        loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
+                        requestLogin();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Email tidak sesuai format", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
     }
@@ -124,13 +136,20 @@ public class LoginActivity extends AppCompatActivity {
                                     String email = jsonObject.getJSONObject("data").getString("email");
                                     String name = jsonObject.getJSONObject("data").getString("name");
                                     String phone = jsonObject.getJSONObject("data").getString("phone");
+                                    String level = jsonObject.getJSONObject("data").getString("level");
+
+                                    if (level.equals("0")) {
+                                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLoginPemilik, true);
+                                    } else if (level.equals("1")) {
+                                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLoginPencari, true);
+                                    }
 
                                     //sharedPreferences
-                                    sharedPrefManager.saveSPInt(SharedPrefManager.SP_UserId, id);
+                                    sharedPrefManager.saveSPIntUser(SharedPrefManager.SP_UserId, id);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_Email, email);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_Email, name);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_Phone, phone);
-                                    sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLogin, true);
+
 
                                     Intent intent = new Intent(mContext, MainActivity.class)
                                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

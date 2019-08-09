@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     String username, phone;
     ProgressDialog progressBar;
     NavigationView navigationView;
+    Integer iduser = 0;
 
     Intent intent;
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity
 
         sharedPrefManager = new SharedPrefManager(MainActivity.this.getApplicationContext());
 
-        //sharedPrefManager.saveSPInt(SharedPrefManager.SP_LaundryId, 0);
+        Log.e("debug", "Shared Preference UserId > " + sharedPrefManager.getSP_UserId());
 
 
 
@@ -177,8 +179,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.customerservice) {
             /*progressBar = ProgressDialog.show(MainActivity.this, null, "Sedang Menghubungkan...", true, false);*/
-
-            if (sharedPrefManager.getSPSudahLogin().equals(true)) {
+            if (sharedPrefManager.getSPSudahLoginPemilik().equals(true) || sharedPrefManager.getSPSudahLoginPencari().equals(true)) {
                 dialog();
             } else {
                 dialogLogin();
@@ -266,15 +267,23 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_add) {
-            intent = new Intent(MainActivity.this, InputActivity.class);
-            startActivity(intent);
+            if (sharedPrefManager.getSPSudahLoginPemilik().equals(true)) {
+                intent = new Intent(MainActivity.this, InputActivity.class);
+                startActivity(intent);
+            } else if (sharedPrefManager.getSPSudahLoginPencari().equals(true)) {
+                dialogLogin();
+            }
+
+
 
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_signout) {
-            sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLogin, false);
+            sharedPrefManager.saveSPInt(SharedPrefManager.SP_UserId, iduser);
+            sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLoginPemilik, false);
+            sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SudahLoginPencari, false);
             startActivity(new Intent(MainActivity.this, LauncherActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
@@ -297,7 +306,7 @@ public class MainActivity extends AppCompatActivity
     private void hideMenu() {
         Menu nav_menu = navigationView.getMenu();
 
-        if (sharedPrefManager.getSPSudahLogin().equals(true)) {
+        if (sharedPrefManager.getSPSudahLoginPemilik().equals(true) || sharedPrefManager.getSPSudahLoginPencari().equals(true)) {
             nav_menu.findItem(R.id.nav_signout).setVisible(true);
             btnLoginDrawer.setVisibility(View.GONE);
             headerpict.setVisibility(View.VISIBLE);

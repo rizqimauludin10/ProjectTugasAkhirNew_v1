@@ -10,11 +10,14 @@ public class SharedPrefManager {
     public static final String SP_Phone = "spPhone";
     public static final String SP_Email = "spEmail";
     public static final String SP_Name = "spName";
-    public static final Integer SP_UserId = 0;
-    public static final Integer SP_LaundryId = 0;
+    public static final String SP_UserId = "user";
+    public static final String SP_LaundryId = "laundry";
     public static final Integer SP_LocationId = 0;
 
-    public static final String SP_SudahLogin = "spSudahLogin";
+    public static final String SP_SudahLoginPemilik = "spSudahLoginPemilik";
+    public static final String SP_SudahLoginPencari = "spSudahLoginPencari";
+
+
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor spEditor;
@@ -29,8 +32,13 @@ public class SharedPrefManager {
         spEditor.commit();
     }
 
-    public void saveSPInt(Integer keySp, int value) {
-        spEditor.putInt(String.valueOf(keySp), value);
+    public void saveSPInt(String keySp, int value) {
+        spEditor.putInt(keySp, value);
+        spEditor.commit();
+    }
+
+    public void saveSPIntUser(String keySp, int value) {
+        spEditor.putInt(keySp, value);
         spEditor.commit();
     }
 
@@ -51,19 +59,23 @@ public class SharedPrefManager {
         return sharedPreferences.getString(SP_Name, "");
     }
 
-    public int getSP_UserId() {
-        return (int) sharedPreferences.getInt(String.valueOf(SP_UserId), 0);
+    public Integer getSP_UserId() {
+        return (Integer) sharedPreferences.getInt(String.valueOf(SP_UserId), 0);
     }
 
     public Integer getSP_LaundryId() {
-        return (int) sharedPreferences.getInt(String.valueOf(SP_LaundryId), 0);
+        return (Integer) sharedPreferences.getInt(String.valueOf(SP_LaundryId), 0);
     }
 
-    public int getSP_LocationId() {
-        return (int) sharedPreferences.getInt(String.valueOf(SP_LocationId), 0);
+    public Integer getSP_LocationId() {
+        return (Integer) sharedPreferences.getInt(String.valueOf(SP_LocationId), 0);
     }
 
-    public Boolean getSPSudahLogin() {
-        return sharedPreferences.getBoolean(SP_SudahLogin, false);
+    public Boolean getSPSudahLoginPemilik() {
+        return sharedPreferences.getBoolean(SP_SudahLoginPemilik, false);
+    }
+
+    public Boolean getSPSudahLoginPencari() {
+        return sharedPreferences.getBoolean(SP_SudahLoginPencari, false);
     }
 }

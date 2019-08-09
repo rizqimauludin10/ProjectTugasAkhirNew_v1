@@ -31,9 +31,10 @@ public class JadwalActivity extends AppCompatActivity {
     EditText buka;
     EditText tutup;
     Button jadwalBt;
-    Integer laundryid;
+    Integer laundryid, userid;
     String notes = "bla";
     SharedPrefManager sharedPrefManager;
+    SharedPrefManager sharedPrefManager1;
     ProgressDialog loading;
     TimePickerDialog timePicker;
     BaseApiService baseApiService;
@@ -46,7 +47,11 @@ public class JadwalActivity extends AppCompatActivity {
         baseApiService = UtilsApi.getApiService();
 
         sharedPrefManager = new SharedPrefManager(JadwalActivity.this.getApplicationContext());
-        laundryid = sharedPrefManager.getSP_UserId();
+        laundryid = sharedPrefManager.getSP_LaundryId();
+
+        userid = sharedPrefManager.getSP_UserId();
+        Log.e("debug", "Shared Preference LaundryId Jadwal> " + laundryid);
+        Log.e("debug", "Shared Preference UserId Jadwal> " + userid);
 
         liburHr = (EditText) findViewById(R.id.liburharian);
         buka = (EditText) findViewById(R.id.jambuka);

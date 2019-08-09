@@ -25,6 +25,12 @@ public class Value {
     @Expose
     private String laundryPhone;
 
+    @SerializedName("laundry_status")
+    @Expose
+    private String laundryStatus;
+
+
+
     @SerializedName("created_at")
     @Expose
 
@@ -145,6 +151,14 @@ public class Value {
 
     public void setLaundryPhone(String laundryPhone) {
         this.laundryPhone = laundryPhone;
+    }
+
+    public String getLaundryStatus() {
+        return laundryStatus;
+    }
+
+    public void setLaundryStatus(String laundryStatus) {
+        this.laundryStatus = laundryStatus;
     }
 
     public String getLocationName() {

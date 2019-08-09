@@ -62,7 +62,6 @@ public class RecycleViewFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         rvLaundry.setLayoutManager(layoutManager);
         rvLaundry.setItemAnimator(new DefaultItemAnimator());
-
         getResultListLaundry();
 
         return v;

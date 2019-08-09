@@ -3,9 +3,13 @@ package com.example.tugasakhir_nyuciapps;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,9 +19,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -25,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.tugasakhir_nyuciapps.model.Value;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -38,6 +45,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -55,7 +63,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -78,11 +88,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public static final String TITLE = "laundry_name";
     public static final String LAT = "laundry_address_lat";
     public static final String LNG = "laundry_address_lng";
+    public static final String phone1 = "laundry_phone";
+    public static final String address = "laundry_address";
 
     private String url = "http://192.168.43.93:8000/api/laundry";
     String tag_json_obj = "json_obj_req";
-    String title;
+    String name, phone, alamat;
     LatLng latLng;
+    Map<String, String> mMarkerMap = new HashMap<>();
+    List<Value> valueList;
 
 
     public MapsFragment() {
@@ -107,6 +121,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         Places.initialize(getActivity(), "AIzaSyB6eSue5JEk-Un_bNSxomc-2x5gygGbCpM");
         placesClient = Places.createClient(getActivity());
 
+        valueList = new ArrayList<>();
+
     }
 
 
@@ -116,27 +132,44 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-    public void addMarkerMaps(LatLng latlng, final String title) {
+    public void addMarkerMaps(LatLng latlng, final String title, final String alamat) {
         markerOptions.position(latlng);
         markerOptions.title(title);
+        markerOptions.snippet(alamat);
+        markerOptions.icon(bitmapDescriptorFromVector(getActivity(), R.drawable.marker));
+
         mMap.addMarker(markerOptions);
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Toast.makeText(getActivity(), marker.getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), phone, Toast.LENGTH_SHORT).show();
+                //Intent intent = new Intent(getActivity(), DetailActivity.class);
+
+
+                //intent.putExtra("name", title);
+                //intent.putExtra("alamat", alamat);
+                //intent.putExtra("phone", phone);
+                /*intent.putExtra("lokasi", lokasi);
+                intent.putExtra("created_at", created_at);
+                intent.putExtra("buka", buka);
+                intent.putExtra("tutup", tutup);
+                intent.putExtra("tglmerah", tglmerah);
+                intent.putExtra("liburharian", liburHarian);
+                intent.putExtra("namapemilik", namapemilik);
+                intent.putExtra("nohppemilik", noHpPemilik);
+                intent.putExtra("antar", antar);
+                intent.putExtra("parfum", parfum);
+                intent.putExtra("biasa", biasa);
+                intent.putExtra("kilat", kilat);
+                intent.putExtra("setrika", setrika);
+                intent.putExtra("sepatu", sepatu);
+                intent.putExtra("karpet", karpet);
+                intent.putExtra("photo", photo);*/
+
+                //getActivity().startActivity(intent);
             }
         });
-
-        /*LatLng tes = new LatLng(-0.141538, 109.411362);
-
-        mMap.addMarker(new MarkerOptions()
-                .position(tes)
-                .title("TES")
-                .snippet("a"))
-                .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.mapsicon));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(tes));*/
-
     }
 
 
@@ -150,6 +183,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         if (mapView != null && mapView.findViewById(Integer.parseInt("1")) != null) {
             View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
@@ -237,6 +271,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 });
     }
 
+
     private void getMarkers() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -248,12 +283,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        title = jsonObject.getString(TITLE);
+                        name = jsonObject.getString(TITLE);
                         latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)),
                                 Double.parseDouble(jsonObject.getString(LNG)));
+                        phone = jsonObject.getString(phone1);
+                        alamat = jsonObject.getString(address);
+
 
                         // Menambah data marker untuk di tampilkan ke google map
-                        addMarkerMaps(latLng, title);
+                        addMarkerMaps(latLng, name, alamat);
+
                     }
 
                 } catch (JSONException e) {
@@ -271,7 +310,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         });
 
         AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
+    }
 
-
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.circlemarker);
+        background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
+        vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
+        Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        background.draw(canvas);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }
