@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,6 +43,7 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
     private Location location;
     private double lat, lng;
     String nama, alamat, phone, desc, kecamatan;
+    private View mapView;
 
 
     @Override
@@ -50,6 +52,7 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
         setContentView(R.layout.activity_place_picker_maps);
         resutText = (TextView) findViewById(R.id.dragg_result);
         getLokasi = (Button) findViewById(R.id.btnGetLokasi);
+        resutText.setSelected(true);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -134,7 +137,8 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
         //titik biru lokasi user pada maps
-        //mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
 
         boolean success = googleMap.setMapStyle(new MapStyleOptions(getResources()
                 .getString(R.string.style_json)));
@@ -146,10 +150,9 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-0.03109, 109.32199);
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, DEFAULT_ZOOM));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, DEFAULT_ZOOM));
         mMap.setOnCameraIdleListener(onCameraIdleListener);
-        /* mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
-        /*mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),DEFAULT_ZOOM));*/
+
     }
 
     @Override

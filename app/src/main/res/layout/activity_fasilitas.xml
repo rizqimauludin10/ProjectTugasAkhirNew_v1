@@ -1,412 +1,521 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/backgroundmain"
-    android:fillViewport="false">
+    android:orientation="vertical"
+    tools:context=".FasilitasActivity">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <include
+        layout="@layout/app_bar_sch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".FasilitasActivity">
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" />
 
-        <include
-            layout="@layout/app_bar_sch"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Isi harga fasilitas laundry"
+        fontPath="font/TitilliumWeb-SemiBold.ttf"
+        tools:ignore="MissingPrefix"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:padding="10dp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top" />
+            android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            card_view:cardBackgroundColor="#8382F3"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="3dp">
-
-            <!-- Main Content View -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    fontPath="font/TitilliumWeb-Bold.ttf"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Antar Jemput"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:ignore="MissingPrefix" />
+                    android:padding="10dp">
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/antarjemput"
-                        fontPath="font/TitilliumWeb-Bold.ttf"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvcucibiasa"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:ems="7"
+                        android:text="Cuci Biasa"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/username"
+                        android:textSize="18sp"
+                        fontPath="font/TitilliumWeb-Bold.ttf"
                         tools:ignore="MissingPrefix" />
 
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            card_view:cardBackgroundColor="#8382F3"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="3dp">
-
-            <!-- Main Content View -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
-
-                <TextView
-                    fontPath="font/TitilliumWeb-Bold.ttf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pilihan Parfum"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:ignore="MissingPrefix" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/pilihanparfum"
-                        fontPath="font/TitilliumWeb-Bold.ttf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:ems="7"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
+                    <TextView
+                        android:id="@+id/rpaj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Rp. "
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/tvcucibiasa"
+                        android:textColor="@color/username"
                         android:textSize="20sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         tools:ignore="MissingPrefix" />
 
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            card_view:cardBackgroundColor="#8382F3"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="3dp">
-
-            <!-- Main Content View -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
-
-                <TextView
-                    fontPath="font/TitilliumWeb-Bold.ttf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cuci Biasa"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:ignore="MissingPrefix" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/cucibiasa"
-                        fontPath="font/TitilliumWeb-Bold.ttf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@android:color/transparent"
-                        android:ems="7"
+                        android:gravity="center_vertical"
+                        android:ems="5"
+                        android:textColor="#F07198"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        android:layout_below="@id/tvcucibiasa"
+                        android:layout_toRightOf="@id/rpaj"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/fasilbiasa"
+                        android:textAlignment="textEnd"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitEnd"
+                        android:layout_toEndOf="@id/tvcucibiasa"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvkilat"
+                        fontPath="font/TitilliumWeb-Bold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cuci Kilat"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textColor="@color/username"
+                        android:textSize="18sp"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/rpkl"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/tvkilat"
+                        android:gravity="center_vertical"
+                        android:text="Rp. "
+                        android:textColor="@color/username"
                         android:textSize="20sp"
                         tools:ignore="MissingPrefix" />
 
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            card_view:cardBackgroundColor="#8382F3"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="3dp">
-
-            <!-- Main Content View -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
-
-                <TextView
-                    fontPath="font/TitilliumWeb-Bold.ttf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cuci Kilat"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:ignore="MissingPrefix" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/cucikilat"
-                        fontPath="font/TitilliumWeb-Bold.ttf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@android:color/transparent"
-                        android:ems="7"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/tvkilat"
+                        android:layout_toRightOf="@id/rpkl"
+                        android:ems="5"
+                        android:inputType="number"
+                        android:textColor="#F07198"
                         android:textSize="20sp"
                         tools:ignore="MissingPrefix" />
 
-                </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_toEndOf="@id/tvkilat"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/shirt"
+                        android:textAlignment="textEnd" />
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                </RelativeLayout>
 
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            card_view:cardBackgroundColor="#8382F3"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="3dp">
+            </androidx.cardview.widget.CardView>
 
-            <!-- Main Content View -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    fontPath="font/TitilliumWeb-Bold.ttf"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Setrika"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:ignore="MissingPrefix" />
+                    android:padding="10dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvsetrika"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Setrika"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/username"
+                        android:textSize="18sp"
+                        fontPath="font/TitilliumWeb-Bold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/rps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Rp. "
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/tvsetrika"
+                        android:textColor="@color/username"
+                        android:textSize="20sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
 
                     <EditText
                         android:id="@+id/setrika"
-                        fontPath="font/TitilliumWeb-Bold.ttf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@android:color/transparent"
-                        android:ems="7"
+                        android:gravity="center_vertical"
+                        android:ems="5"
+                        android:textColor="#F07198"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        android:layout_below="@id/tvsetrika"
+                        android:layout_toRightOf="@id/rps"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/iron"
+                        android:textAlignment="textEnd"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitEnd"
+                        android:layout_toEndOf="@id/tvsetrika"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/tvsepatu"
+                        fontPath="font/TitilliumWeb-Bold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cuci Sepatu"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textColor="@color/username"
+                        android:textSize="18sp"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/rpsp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/tvsepatu"
+                        android:gravity="center_vertical"
+                        android:text="Rp. "
+                        android:textColor="@color/username"
                         android:textSize="20sp"
                         tools:ignore="MissingPrefix" />
 
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            card_view:cardBackgroundColor="#8382F3"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="3dp">
-
-            <!-- Main Content View -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
-
-                <TextView
-                    fontPath="font/TitilliumWeb-Bold.ttf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Sepatu"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:ignore="MissingPrefix" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/sepatu"
-                        fontPath="font/TitilliumWeb-Bold.ttf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@android:color/transparent"
-                        android:ems="7"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/tvsepatu"
+                        android:layout_toRightOf="@id/rpsp"
+                        android:ems="5"
+                        android:inputType="number"
+                        android:textColor="#F07198"
                         android:textSize="20sp"
                         tools:ignore="MissingPrefix" />
 
-                </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_toEndOf="@id/tvsepatu"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/shoes"
+                        android:textAlignment="textEnd" />
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                </RelativeLayout>
 
+            </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            card_view:cardBackgroundColor="#8382F3"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="3dp">
-
-            <!-- Main Content View -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    fontPath="font/TitilliumWeb-Bold.ttf"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Karpet"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:ignore="MissingPrefix" />
+                    android:padding="10dp">
 
+                    <TextView
+                        android:id="@+id/tvkarpet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cuci Karpet"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/username"
+                        android:textSize="18sp"
+                        fontPath="font/TitilliumWeb-Bold.ttf"
+                        tools:ignore="MissingPrefix" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/rpk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Rp. "
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/tvkarpet"
+                        android:textColor="@color/username"
+                        android:textSize="20sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
 
                     <EditText
                         android:id="@+id/karpet"
-                        fontPath="font/TitilliumWeb-Bold.ttf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@android:color/transparent"
-                        android:ems="7"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:ems="5"
+                        android:textColor="#F07198"
                         android:textSize="20sp"
+                        android:inputType="number"
+                        android:layout_below="@id/tvkarpet"
+                        android:layout_toRightOf="@id/rpk"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
                         tools:ignore="MissingPrefix" />
 
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/carpet"
+                        android:textAlignment="textEnd"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitEnd"
+                        android:layout_toEndOf="@id/tvkarpet"
+                        android:layout_alignParentEnd="true" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/tvantarjemput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Antar Jemput"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/username"
+                        android:textSize="18sp"
+                        fontPath="font/TitilliumWeb-Bold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/rpajj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Rp. "
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/tvantarjemput"
+                        android:textColor="@color/username"
+                        android:textSize="20sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+
+                    <EditText
+                        android:id="@+id/antarjemput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:ems="5"
+                        android:textColor="#F07198"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        android:layout_below="@id/tvantarjemput"
+                        android:layout_toRightOf="@id/rpajj"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/van"
+                        android:textAlignment="textEnd"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitEnd"
+                        android:layout_toEndOf="@id/tvantarjemput"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvparfum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pilihan Parfum"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/username"
+                        android:textSize="18sp"
+                        fontPath="font/TitilliumWeb-Bold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/rppf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Rp. "
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/tvparfum"
+                        android:textColor="@color/username"
+                        android:textSize="20sp"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+
+                    <EditText
+                        android:id="@+id/pilihanparfum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:ems="5"
+                        android:textColor="#F07198"
+                        android:textSize="20sp"
+                        android:inputType="number"
+                        android:layout_below="@id/tvparfum"
+                        android:layout_toRightOf="@id/rppf"
+                        fontPath="font/TitilliumWeb-SemiBold.ttf"
+                        tools:ignore="MissingPrefix" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/parfume"
+                        android:textAlignment="textEnd"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitEnd"
+                        android:layout_toEndOf="@id/tvparfum"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
             <Button
                 android:id="@+id/btfasilitas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Selesai"
-                android:background="@drawable/ripple_effect"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
+                android:background="@drawable/rippleinput"
                 fontPath="font/TitilliumWeb-Bold.ttf"
                 android:textColor="@color/white"
+                android:layout_marginTop="10dp"
                 android:textAllCaps="false"
                 tools:ignore="MissingPrefix" />
-        </RelativeLayout>
+        </LinearLayout>
 
-    </LinearLayout>
-</ScrollView>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

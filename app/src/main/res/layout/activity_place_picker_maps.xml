@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,30 +19,32 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:padding="10dp">
 
-            <TextView
+        <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/alamat" />
+            android:layout_height="80dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="10dp"
+            app:cardUseCompatPadding="true">
 
             <TextView
                 android:id="@+id/dragg_result"
-                fontPath="font/TitilliumWeb-SemiBold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Please drag map to your address.."
+                android:text="Geser maps untuk mendapatkan alamat"
                 android:textColor="@color/username"
-                android:textSize="14dp"
-                tools:ignore="MissingPrefix" />
+                android:textSize="13dp"
+                fontPath="font/TitilliumWeb-SemiBold.ttf"
+                tools:ignore="MissingPrefix"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true" />
 
-        </FrameLayout>
-
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 

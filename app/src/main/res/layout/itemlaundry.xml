@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemclick"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:background="@color/backgroundmain"
-    android:orientation="vertical"
-    android:id="@+id/itemclick"
     android:background="@drawable/ripple_effect"
-    android:clickable="true">
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:background="@color/background">
+
 
     <LinearLayout
 
-        android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/IvLaundry"
-            android:scaleType="centerCrop"
-            android:background="@color/image"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="1dp">
+
+            <ImageView
+                android:id="@+id/IvLaundry"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@color/image"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:paddingLeft="5dp">
 
             <TextView
                 android:id="@+id/buka"
@@ -40,9 +50,9 @@
 
             <ImageView
                 android:id="@+id/circle"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/circle" />
@@ -59,16 +69,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=", "
-                android:textStyle="bold"
+                android:textColor="@color/text"
                 android:textSize="15sp"
-                android:textColor="@color/text" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvDescLaundry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alamat Laundry"
                 android:maxLength="20"
+                android:text="Alamat Laundry"
                 android:textColor="@color/text"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -77,8 +87,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -110,9 +120,9 @@
 
                 <ImageView
                     android:id="@+id/circle1"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:src="@drawable/circle" />
@@ -122,25 +132,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cuci Biasa"
-                    android:textSize="18sp"
-                    android:textColor="#F07198" />
+                    android:textColor="#F07198"
+                    android:textSize="18sp" />
 
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvNamaLaundry"
+                fontPath="font/TitilliumWeb-SemiBold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="Nama Laundry"
                 android:textSize="20sp"
-                android:layout_marginBottom="20dp"
-                fontPath="font/TitilliumWeb-SemiBold.ttf"
                 tools:ignore="MissingPrefix" />
 
         </LinearLayout>
 
 
     </LinearLayout>
+
 
 </LinearLayout>

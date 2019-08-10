@@ -23,25 +23,6 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/bgbg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/bn"
-            android:background="@color/tittleApps" />
-
-        <ImageView
-            android:layout_above="@id/bgbg"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="-10dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/screen" />
-    </RelativeLayout>
 
 </RelativeLayout>

@@ -2,9 +2,7 @@ package com.example.tugasakhir_nyuciapps;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Bitmap;
@@ -22,15 +20,14 @@ import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.tugasakhir_nyuciapps.model.LaundryDataResponse;
 import com.example.tugasakhir_nyuciapps.model.Value;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -61,15 +58,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
@@ -85,6 +76,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private final float DEFAULT_ZOOM_MAX = 17.0f;
 
     MarkerOptions markerOptions = new MarkerOptions();
+    public static final String ID = "laundry_id";
     public static final String TITLE = "laundry_name";
     public static final String LAT = "laundry_address_lat";
     public static final String LNG = "laundry_address_lng";
@@ -94,8 +86,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private String url = "http://192.168.43.93:8000/api/laundry";
     String tag_json_obj = "json_obj_req";
     String name, phone, alamat;
+    Integer id;
     LatLng latLng;
-    Map<String, String> mMarkerMap = new HashMap<>();
+    Map<String, Integer> markers = new HashMap<String, Integer>();
     List<Value> valueList;
 
 
@@ -121,7 +114,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         Places.initialize(getActivity(), "AIzaSyB6eSue5JEk-Un_bNSxomc-2x5gygGbCpM");
         placesClient = Places.createClient(getActivity());
 
-        valueList = new ArrayList<>();
+        //valueList = new ArrayList<>();
 
     }
 
@@ -133,6 +126,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void addMarkerMaps(LatLng latlng, final String title, final String alamat) {
+
+
         markerOptions.position(latlng);
         markerOptions.title(title);
         markerOptions.snippet(alamat);
@@ -140,18 +135,26 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         mMap.addMarker(markerOptions);
 
+
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                //Toast.makeText(getActivity(), phone, Toast.LENGTH_SHORT).show();
+
+
+                Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
+
+
+
+
+
                 //Intent intent = new Intent(getActivity(), DetailActivity.class);
 
 
                 //intent.putExtra("name", title);
                 //intent.putExtra("alamat", alamat);
                 //intent.putExtra("phone", phone);
-                /*intent.putExtra("lokasi", lokasi);
-                intent.putExtra("created_at", created_at);
+                //*intent.putExtra("lokasi", lokasi);
+                /*intent.putExtra("created_at", created_at);
                 intent.putExtra("buka", buka);
                 intent.putExtra("tutup", tutup);
                 intent.putExtra("tglmerah", tglmerah);
@@ -246,7 +249,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         if (task.isSuccessful()) {
                             mLastKnownLocation = task.getResult();
                             if (mLastKnownLocation != null) {
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                             } else {
                                 final LocationRequest locationRequest = LocationRequest.create();
                                 locationRequest.setInterval(10000);
@@ -283,6 +286,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        id = jsonObject.getInt(ID);
                         name = jsonObject.getString(TITLE);
                         latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)),
                                 Double.parseDouble(jsonObject.getString(LNG)));
@@ -292,6 +296,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
                         // Menambah data marker untuk di tampilkan ke google map
                         addMarkerMaps(latLng, name, alamat);
+
 
                     }
 

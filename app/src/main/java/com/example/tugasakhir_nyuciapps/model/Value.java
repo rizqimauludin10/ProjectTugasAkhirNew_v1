@@ -113,7 +113,7 @@ public class Value {
     @Expose
     private String name;
 
-    public Integer getLaundryId() {
+    public Integer getLaundryId(Integer id) {
         return laundryId;
     }
 

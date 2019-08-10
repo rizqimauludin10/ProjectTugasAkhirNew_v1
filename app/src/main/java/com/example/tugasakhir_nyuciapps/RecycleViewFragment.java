@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.tugasakhir_nyuciapps.adapter.LaundryAdapter;
 import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
@@ -35,6 +37,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class RecycleViewFragment extends Fragment {
 
     View v;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView rvLaundry;
     ProgressDialog progressDialog;
@@ -53,6 +56,10 @@ public class RecycleViewFragment extends Fragment {
 
 
         rvLaundry = (RecyclerView) v.findViewById(R.id.rvLaundry);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe);
+
+
+
 
         context = getActivity();
         baseApiService = UtilsApi.getApiService();
@@ -64,6 +71,18 @@ public class RecycleViewFragment extends Fragment {
         rvLaundry.setItemAnimator(new DefaultItemAnimator());
         getResultListLaundry();
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        getResultListLaundry();
+                    }
+                }, 3000);
+            }
+        });
         return v;
 
     }
