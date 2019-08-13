@@ -440,7 +440,7 @@
                 android:id="@+id/tampilMaps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ripple_effect"
+                android:background="@drawable/rippleinput"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 fontPath="font/TitilliumWeb-Regular.ttf"

@@ -49,6 +49,7 @@
                 android:inputType="text"
                 android:textColor="#787878"
                 android:textSize="14sp"
+                android:focusable="false"
                 fontPath="font/TitilliumWeb-Regular.ttf"
                 tools:ignore="MissingPrefix" />
 

@@ -47,7 +47,7 @@
                 android:id="@+id/search_activity_content"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:text="Masukkan alamat atau nama tempat"
+                android:text="Temukan laundry disekitar anda.."
                 android:textSize="14sp"
                 android:focusable="false"
                 android:paddingStart="45dp"

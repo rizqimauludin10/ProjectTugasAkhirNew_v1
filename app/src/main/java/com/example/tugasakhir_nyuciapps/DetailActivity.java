@@ -1,8 +1,10 @@
 package com.example.tugasakhir_nyuciapps;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -20,17 +22,28 @@ public class DetailActivity extends AppCompatActivity {
 
     String namaEx, alamatEx, lokasiEx, createdEX, bukaEX, tutupEx, liburHarianEx, namaPemilikEx, nomorPemilikEx, photoEx, statusBukaEx;
     Integer tglmerahiconEx;
-    TextView nama, alamat, lokasi, created, buka, tutup, liburHarian, tvNamaPemilik, tvNomorPemilik, statusBuka;
+    TextView nama, alamat, lokasi, created, buka, tutup, liburHarian, tvNamaPemilik, tvNomorPemilik, statusBuka, desc_login;
     TextView biasa, kilat, setrika, sepatu, karpet, antar, parfum;
     String biasaEx, kilatEx, setrikaEx, sepatuEx, karpetEx, antarEx, parfumEx;
     ImageView tglmerah, ivHarian, photo;
     Button hubungiPemilik;
+    Button cs_btnTidak, cs_btnYa, btncsLogin;
+    ImageView closeBtn, closeBtnLogin;
     String path = "http://192.168.43.93:8000/images/";
+    SharedPrefManager sharedPrefManager;
+    Dialog epicDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        sharedPrefManager = new SharedPrefManager(DetailActivity.this.getApplicationContext());
+
+        String email = sharedPrefManager.getSp_Email();
+        String name = sharedPrefManager.getSp_Name();
+        String phone = sharedPrefManager.getSP_Phone();
+        epicDialog = new Dialog(this);
 
         nama = (TextView) findViewById(R.id.tvNamaLaundry);
         alamat = (TextView) findViewById(R.id.alamatLaundry);
@@ -53,6 +66,11 @@ public class DetailActivity extends AppCompatActivity {
         parfum = (TextView) findViewById(R.id.hargaparfum);
         photo = (ImageView) findViewById(R.id.ivPhoto);
         statusBuka = (TextView) findViewById(R.id.statusbuka);
+        cs_btnTidak = (Button) findViewById(R.id.cs_btnTidak);
+        cs_btnYa = (Button) findViewById(R.id.cs_btnYa);
+        closeBtn = (ImageView) findViewById(R.id.btn_close);
+        closeBtnLogin = (ImageView) findViewById(R.id.btn_closeLogin);
+        desc_login = (TextView) findViewById(R.id.desc_login);
 
 
         Bundle extras = getIntent().getExtras();
@@ -138,9 +156,16 @@ public class DetailActivity extends AppCompatActivity {
             hubungiPemilik.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://api.whatsapp.com/send?phone=" + nomorPemilikEx + "&text=Saya%20perlu%20bantuan%20Pemilik%20" + namaEx));
-                    startActivity(intent);
+                    if (sharedPrefManager.getSPSudahLoginPencari().equals(true)) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("https://api.whatsapp.com/send?phone=" + nomorPemilikEx + "&text=Saya%20perlu%20bantuan%20Pemilik%20" + namaEx));
+                        startActivity(intent);
+                    } else if (sharedPrefManager.getSPSudahLoginPemilik().equals(true)) {
+                        dialogPencari();
+                    } else {
+                        dialogLogin();
+                    }
+
                 }
             });
 
@@ -151,5 +176,61 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    public void dialogPencari() {
+        epicDialog.setContentView(R.layout.cs_pencari_login);
+        closeBtnLogin = (ImageView) epicDialog.findViewById(R.id.btn_closeLogin);
+        desc_login = (TextView) epicDialog.findViewById(R.id.desc_login);
+        btncsLogin = (Button) epicDialog.findViewById(R.id.btn_cslogin);
+
+        closeBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epicDialog.dismiss();
+            }
+        });
+
+        btncsLogin.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(DetailActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        epicDialog.show();
+
+    }
+
+    public void dialogLogin() {
+        epicDialog.setContentView(R.layout.cs_login);
+        closeBtnLogin = (ImageView) epicDialog.findViewById(R.id.btn_closeLogin);
+        desc_login = (TextView) epicDialog.findViewById(R.id.desc_login);
+        btncsLogin = (Button) epicDialog.findViewById(R.id.btn_cslogin);
+
+        closeBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epicDialog.dismiss();
+            }
+        });
+
+        btncsLogin.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(DetailActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        epicDialog.show();
+
     }
 }

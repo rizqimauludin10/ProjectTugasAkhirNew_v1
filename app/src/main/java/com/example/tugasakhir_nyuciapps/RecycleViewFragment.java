@@ -58,9 +58,6 @@ public class RecycleViewFragment extends Fragment {
         rvLaundry = (RecyclerView) v.findViewById(R.id.rvLaundry);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe);
 
-
-
-
         context = getActivity();
         baseApiService = UtilsApi.getApiService();
 
@@ -80,11 +77,10 @@ public class RecycleViewFragment extends Fragment {
                         swipeRefreshLayout.setRefreshing(false);
                         getResultListLaundry();
                     }
-                }, 3000);
+                }, 2000);
             }
         });
         return v;
-
     }
 
     @Override

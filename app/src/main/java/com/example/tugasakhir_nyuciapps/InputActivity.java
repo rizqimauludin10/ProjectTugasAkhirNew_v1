@@ -321,7 +321,7 @@ public class InputActivity extends AppCompatActivity {
 
     public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         byte[] imgByte = byteArrayOutputStream.toByteArray();
 
         String imgString = Base64.encodeToString(imgByte, Base64.NO_WRAP);
@@ -329,29 +329,14 @@ public class InputActivity extends AppCompatActivity {
         return imgString;
     }
 
-   /* private Bitmap addWaterMark(Bitmap src) {
-        int w = src.getWidth();
-        int h = src.getHeight();
-        Bitmap result = Bitmap.createBitmap(w, h, src.getConfig());
-        Canvas canvas = new Canvas(result);
-        canvas.drawBitmap(src, 0, 0, null);
-
-        Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.fasilbiasa);
-        //  canvas.drawBitmap(waterMark, 0, 0, null);
-        int startX= (canvas.getWidth()-waterMark.getWidth())/2;//for horisontal position
-        int startY=(canvas.getHeight()-waterMark.getHeight())/2;//for vertical position
-        canvas.drawBitmap(waterMark,startX,startY,null);
-
-        return result;
-    }*/
 
     private void requestSimpan() {
         String laundry_pict = imageToString(bitmap);
         mApiService.inputLaundryProfile(
                 userid,
                 location,
-                laundry_pict,
                 nama.getText().toString(),
+                laundry_pict,
                 desc.getText().toString(),
                 phone.getText().toString(),
                 libur,

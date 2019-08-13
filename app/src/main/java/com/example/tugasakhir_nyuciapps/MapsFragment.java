@@ -27,8 +27,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.tugasakhir_nyuciapps.model.LaundryDataResponse;
-import com.example.tugasakhir_nyuciapps.model.Value;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -58,10 +56,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -80,16 +74,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public static final String TITLE = "laundry_name";
     public static final String LAT = "laundry_address_lat";
     public static final String LNG = "laundry_address_lng";
-    public static final String phone1 = "laundry_phone";
+    public static final String lokasi = "location_name";
     public static final String address = "laundry_address";
+    public static final String photo = "laundry_pict";
+    public static final String jamBuka = "nyucischedule_open_hours";
+    public static final String jamTutup = "nyucischedule_close_hours";
+    public static final String cuciBiasa = "nyuciservice_pricethree";
 
     private String url = "http://192.168.43.93:8000/api/laundry";
     String tag_json_obj = "json_obj_req";
-    String name, phone, alamat;
+    String name, phone, alamat, foto;
     Integer id;
     LatLng latLng;
-    Map<String, Integer> markers = new HashMap<String, Integer>();
-    List<Value> valueList;
 
 
     public MapsFragment() {
@@ -125,27 +121,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-    public void addMarkerMaps(LatLng latlng, final String title, final String alamat) {
-
+    public void addMarkerMaps(LatLng latlng, final String title, final String phone, final String foto) {
 
         markerOptions.position(latlng);
         markerOptions.title(title);
-        markerOptions.snippet(alamat);
+        markerOptions.snippet(phone);
         markerOptions.icon(bitmapDescriptorFromVector(getActivity(), R.drawable.marker));
 
         mMap.addMarker(markerOptions);
-
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getActivity()));
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
 
+                //Value value = (Value) marker.getTag();
 
-                Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
-
-
-
-
+                //Toast.makeText(getActivity(), value.getLaundryName(), Toast.LENGTH_SHORT).show();
 
                 //Intent intent = new Intent(getActivity(), DetailActivity.class);
 
@@ -287,15 +279,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         id = jsonObject.getInt(ID);
-                        name = jsonObject.getString(TITLE);
+                        name = jsonObject.getString(TITLE) + "_" + jsonObject.getString(photo);
                         latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)),
                                 Double.parseDouble(jsonObject.getString(LNG)));
-                        phone = jsonObject.getString(phone1);
-                        alamat = jsonObject.getString(address);
+                        phone = jsonObject.getString(address) + " * " + jsonObject.getString(lokasi) + "_"
+                                + jsonObject.getString(jamBuka) + "_"
+                                + jsonObject.getString(jamTutup) + "_"
+                                + jsonObject.getString(cuciBiasa);
+                        //foto = jsonObject.getString(photo);
 
 
                         // Menambah data marker untuk di tampilkan ke google map
-                        addMarkerMaps(latLng, name, alamat);
+
+                        addMarkerMaps(latLng, name, phone, foto);
 
 
                     }
@@ -309,7 +305,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Error: ", error.getMessage());
+                Log.e("error: ", error.getMessage());
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
