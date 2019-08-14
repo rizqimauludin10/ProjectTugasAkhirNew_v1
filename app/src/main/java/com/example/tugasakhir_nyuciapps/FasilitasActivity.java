@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tugasakhir_nyuciapps.apihelper.BaseApiService;
@@ -29,6 +30,7 @@ public class FasilitasActivity extends AppCompatActivity {
     String serviceid = "1";
     String notes = "notes";
     Button selesai;
+    ImageView back;
     SharedPrefManager sharedPrefManager;
     Integer laundryid;
     ProgressDialog loading;
@@ -52,6 +54,15 @@ public class FasilitasActivity extends AppCompatActivity {
         sepatu = (EditText) findViewById(R.id.sepatu);
         karpet = (EditText) findViewById(R.id.karpet);
         selesai = (Button) findViewById(R.id.btfasilitas);
+        back = (ImageView) findViewById(R.id.backbutton4);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FasilitasActivity.this, JadwalActivity.class));
+                finish();
+            }
+        });
 
         selesai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +95,7 @@ public class FasilitasActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("debug", "OnResponse : Berhasil");
                     //loading.dismiss();
+                    Toast.makeText(getApplicationContext(), "Berhasil menambahkan data laundry", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(FasilitasActivity.this, MainActivity.class));
                     finish();
                 } else {

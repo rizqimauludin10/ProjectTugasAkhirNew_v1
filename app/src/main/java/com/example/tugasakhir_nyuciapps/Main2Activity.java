@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -53,7 +54,7 @@ public class Main2Activity extends AppCompatActivity {
         backbutton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Main2Activity.this, Search.class);
+                Intent intent = new Intent(Main2Activity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -77,6 +78,18 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            Intent intent = new Intent(Main2Activity.this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
 

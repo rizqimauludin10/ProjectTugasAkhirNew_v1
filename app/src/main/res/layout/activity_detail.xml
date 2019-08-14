@@ -43,7 +43,7 @@
                     android:id="@+id/statusbuka"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Buka"
+                    android:text="Verifikasi"
                     android:textSize="16sp"
                     fontPath="font/TitilliumWeb-Bold.ttf"
                     tools:ignore="MissingPrefix" />

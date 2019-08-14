@@ -279,10 +279,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         id = jsonObject.getInt(ID);
-                        name = jsonObject.getString(TITLE) + "_" + jsonObject.getString(photo);
+                        name = jsonObject.getString(TITLE) + "_"
+                                + jsonObject.getString(photo) + "_"
+                                + jsonObject.getString(lokasi);
                         latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)),
                                 Double.parseDouble(jsonObject.getString(LNG)));
-                        phone = jsonObject.getString(address) + " * " + jsonObject.getString(lokasi) + "_"
+                        phone = jsonObject.getString(address) + "_"
                                 + jsonObject.getString(jamBuka) + "_"
                                 + jsonObject.getString(jamTutup) + "_"
                                 + jsonObject.getString(cuciBiasa);

@@ -35,6 +35,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         TextView tvOperasional = (TextView) view.findViewById(R.id.tvOperasional);
         TextView tvBiasa = (TextView) view.findViewById(R.id.IwBiasa);
         TextView tvAlamat = (TextView) view.findViewById(R.id.IwAlamat);
+        TextView tvlokasi = (TextView) view.findViewById(R.id.lokasilaundry);
         ImageView ivWindow = (ImageView) view.findViewById(R.id.iv_info);
         Typeface typeface = Typeface.createFromAsset(context.getAssets(), "font/TitilliumWeb-Bold.ttf");
         Typeface typeface_a = Typeface.createFromAsset(context.getAssets(), "font/TitilliumWeb-SemiBold.ttf");
@@ -47,6 +48,8 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             Picasso.get().load(path + str2[1]).into(ivWindow);
             tvTittle.setTypeface(typeface);
             tvTittle.setText(str2[0]);
+            tvlokasi.setTypeface(typeface);
+            tvlokasi.setText(str2[2]);
         }
 
         String snippet = marker.getSnippet();

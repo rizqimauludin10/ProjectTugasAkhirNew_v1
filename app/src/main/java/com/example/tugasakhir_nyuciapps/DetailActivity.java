@@ -77,12 +77,11 @@ public class DetailActivity extends AppCompatActivity {
         if (extras != null) {
             statusBukaEx = extras.getString("stbuka");
 
-
-            if (statusBukaEx == "Buka") {
-                statusBuka.setText("Buka");
+            if (statusBukaEx == ("Tutup")) {
+                statusBuka.setText("Verifikasi");
                 statusBuka.setTextColor(Color.parseColor("#13476A"));
             } else {
-                statusBuka.setText("Tutup");
+                statusBuka.setText("Verifikasi");
                 statusBuka.setTextColor(Color.parseColor("#EE2727"));
 
             }
@@ -158,7 +157,7 @@ public class DetailActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if (sharedPrefManager.getSPSudahLoginPencari().equals(true)) {
                         Intent intent = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("https://api.whatsapp.com/send?phone=" + nomorPemilikEx + "&text=Saya%20perlu%20bantuan%20Pemilik%20" + namaEx));
+                                Uri.parse("https://api.whatsapp.com/send?phone=" + nomorPemilikEx + "&text=Hallo%20Saya%20perlu%20bantuan%20Pemilik%20" + namaEx + "%0D" + " " + email + " " + "%0D"));
                         startActivity(intent);
                     } else if (sharedPrefManager.getSPSudahLoginPemilik().equals(true)) {
                         dialogPencari();

@@ -206,8 +206,36 @@ public class MainActivity extends AppCompatActivity
         btncsLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                epicDialog.dismiss();
                 intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        epicDialog.show();
+
+    }
+
+    public void dialogLoginPem() {
+        epicDialog.setContentView(R.layout.cs_pemilik_login);
+        closeBtnLogin = (ImageView) epicDialog.findViewById(R.id.btn_closeLogin);
+        desc_login = (TextView) epicDialog.findViewById(R.id.desc_login);
+        btncsLogin = (Button) epicDialog.findViewById(R.id.btn_cslogin);
+
+        closeBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epicDialog.dismiss();
+            }
+        });
+
+        btncsLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epicDialog.dismiss();
+               /* intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);*/
             }
         });
 
@@ -271,12 +299,10 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(MainActivity.this, InputActivity.class);
                 startActivity(intent);
             } else if (sharedPrefManager.getSPSudahLoginPencari().equals(true)) {
-                dialogLogin();
+                dialogLoginPem();
             }
 
 
-
-        } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_about) {
 
@@ -313,7 +339,7 @@ public class MainActivity extends AppCompatActivity
 
         } else {
             nav_menu.findItem(R.id.nav_signout).setVisible(false);
-            nav_menu.findItem(R.id.nav_profile).setVisible(false);
+            //nav_menu.findItem(R.id.nav_profile).setVisible(false);
             prusername.setText("Kamu belum login, login dulu yuk");
             prphone.setText("");
             btnLoginDrawer.setVisibility(View.VISIBLE);

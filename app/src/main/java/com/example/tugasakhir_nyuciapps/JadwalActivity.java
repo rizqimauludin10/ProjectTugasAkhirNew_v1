@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class JadwalActivity extends AppCompatActivity {
     EditText buka;
     EditText tutup;
     Button jadwalBt;
+    ImageView back;
     Integer laundryid, userid;
     String notes = "bla";
     SharedPrefManager sharedPrefManager;
@@ -57,6 +59,15 @@ public class JadwalActivity extends AppCompatActivity {
         buka = (EditText) findViewById(R.id.jambuka);
         tutup = (EditText) findViewById(R.id.jamtutup);
         jadwalBt = (Button) findViewById(R.id.btjadwal);
+        back = (ImageView) findViewById(R.id.backbutton6);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(JadwalActivity.this, InputActivity.class));
+                finish();
+            }
+        });
 
 
         jadwalBt.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +75,6 @@ public class JadwalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //loading = ProgressDialog.show(getApplicationContext(), null, "Harap Tunggu....", true, false);
                 jadwal();
-
             }
         });
 

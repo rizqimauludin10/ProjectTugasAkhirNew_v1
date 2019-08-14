@@ -203,16 +203,13 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 submitForm();
-
-
-
             }
         });
 
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InputActivity.this, FasilitasActivity.class));
+                startActivity(new Intent(InputActivity.this, MainActivity.class));
                 finish();
             }
         });
