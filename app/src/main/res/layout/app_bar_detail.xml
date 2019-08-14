@@ -27,6 +27,18 @@
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true" />
 
+        <TextView
+            android:layout_toEndOf="@id/backbutton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Detail Laundry"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:textColor="@color/tittleApps"
+            fontPath="font/Dosis-SemiBold.ttf"
+            tools:ignore="MissingPrefix" />
+
 
     </RelativeLayout>
 

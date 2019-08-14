@@ -25,7 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView nama, alamat, lokasi, created, buka, tutup, liburHarian, tvNamaPemilik, tvNomorPemilik, statusBuka, desc_login;
     TextView biasa, kilat, setrika, sepatu, karpet, antar, parfum;
     String biasaEx, kilatEx, setrikaEx, sepatuEx, karpetEx, antarEx, parfumEx;
-    ImageView tglmerah, ivHarian, photo;
+    ImageView tglmerah, ivHarian, photo, back;
     Button hubungiPemilik;
     Button cs_btnTidak, cs_btnYa, btncsLogin;
     ImageView closeBtn, closeBtnLogin;
@@ -71,6 +71,7 @@ public class DetailActivity extends AppCompatActivity {
         closeBtn = (ImageView) findViewById(R.id.btn_close);
         closeBtnLogin = (ImageView) findViewById(R.id.btn_closeLogin);
         desc_login = (TextView) findViewById(R.id.desc_login);
+        back = (ImageView) findViewById(R.id.backbutton3);
 
 
         Bundle extras = getIntent().getExtras();
@@ -170,6 +171,16 @@ public class DetailActivity extends AppCompatActivity {
 
 
         }
+
+        back.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(DetailActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
