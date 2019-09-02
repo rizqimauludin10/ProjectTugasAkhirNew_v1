@@ -181,9 +181,26 @@
             tools:ignore="MissingPrefix" />
 
         <EditText
-            android:id="@+id/et_noHp_regis"
-            android:layout_width="match_parent"
+            android:id="@+id/loc"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
+            android:layout_marginEnd="10dp"
+            android:focusable="false"
+            android:layout_below="@id/txt_noHp_regis"
+            android:hint="+62"
+            android:textColor="#3F4247"
+            android:textSize="16sp"
+            android:ems="2"
+            fontPath="font/TitilliumWeb-SemiBold.ttf"
+            tools:ignore="MissingPrefix"
+           android:textAlignment="center"
+            android:background="@drawable/edittext_style_login"/>
+
+        <EditText
+            android:id="@+id/et_noHp_regis"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_toEndOf="@id/loc"
             android:layout_below="@id/txt_noHp_regis"
             android:background="@drawable/edittext_style_login"
             android:ems="15"

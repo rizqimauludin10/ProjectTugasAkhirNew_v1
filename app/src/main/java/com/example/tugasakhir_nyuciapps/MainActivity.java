@@ -295,12 +295,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_add) {
-            if (sharedPrefManager.getSPSudahLoginPemilik().equals(true)) {
+            /*if (sharedPrefManager.getSPSudahLoginPemilik().equals(true)) {
                 intent = new Intent(MainActivity.this, InputActivity.class);
                 startActivity(intent);
             } else if (sharedPrefManager.getSPSudahLoginPencari().equals(true)) {
                 dialogLoginPem();
-            }
+            }*/
+
+            intent = new Intent(MainActivity.this, InputActivity.class);
+            startActivity(intent);
 
 
 

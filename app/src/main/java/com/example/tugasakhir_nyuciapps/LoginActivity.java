@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -96,19 +99,38 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (etusername.getText().toString().isEmpty()) {
+                if (etusername.getText().toString().isEmpty() && etpassword.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Masukkan alamat email dan password", Toast.LENGTH_SHORT).show();
+                } else if(etusername.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Masukkan alamat email", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (etusername.getText().toString().trim().matches(emailPattern)) {
+                } else if(etpassword.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Masukkan password", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (Patterns.EMAIL_ADDRESS.matcher(etusername.getText().toString().trim()).matches()) {
                         loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
                         requestLogin();
-                    } else {
+                    } else if (etpassword.getText().toString().length()<6 && !isValidPassword(etpassword.getText().toString())){
+                        Toast.makeText(getApplicationContext(), "Password tidak sesuai format", Toast.LENGTH_SHORT).show();
+                    } else if (!etusername.getText().toString().trim().matches(emailPattern)){
                         Toast.makeText(getApplicationContext(), "Email tidak sesuai format", Toast.LENGTH_SHORT).show();
                     }
                 }
 
             }
         });
+    }
+
+    public static boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
     }
 
     @Override

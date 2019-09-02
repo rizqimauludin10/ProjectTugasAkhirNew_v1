@@ -189,51 +189,6 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="20dp">
-
-            <TextView
-                android:id="@+id/ketKecamatan"
-                fontPath="font/TitilliumWeb-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kecamatan"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp"
-                tools:ignore="MissingPrefix" />
-
-            <TextView
-                android:id="@+id/btKec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ketKecamatan"
-                android:text=" *"
-                android:textColor="@color/bintang"
-                android:textSize="16sp" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp">
-
-            <Spinner
-                android:id="@+id/spinnerKecamatan"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:outlineSpotShadowColor="@color/iconApps"
-                android:spinnerMode="dialog"
-                android:tooltipText="Pilih Kecamatan" />
-
-        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -448,6 +403,53 @@
                 android:text="Ubah Lokasi" />
         </LinearLayout>
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/ketKecamatan"
+                fontPath="font/TitilliumWeb-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kecamatan"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/btKec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/ketKecamatan"
+                android:text=" *"
+                android:textColor="@color/bintang"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
+
+            <Spinner
+                android:id="@+id/spinnerKecamatan"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:outlineSpotShadowColor="@color/iconApps"
+                android:spinnerMode="dialog"
+                android:tooltipText="Pilih Kecamatan" />
+
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -547,12 +549,26 @@
             android:paddingRight="20dp"
             android:paddingBottom="10dp">
 
+
+
             <ImageView
                 android:id="@+id/photo"
-                android:layout_marginTop="10dp"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/photosrc"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/addimage"/>
+            </FrameLayout>
 
             <Button
                 android:id="@+id/openCamera"
@@ -567,6 +583,8 @@
                 android:textColor="@color/white"
                 fontPath="font/TitilliumWeb-SemiBold.ttf"
                 tools:ignore="MissingPrefix" />
+
+
 
         </RelativeLayout>
 

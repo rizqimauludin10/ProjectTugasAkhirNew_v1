@@ -56,7 +56,6 @@ public class InputActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageView backButton2;
     SharedPrefManager sharedPrefManager;
-    SharedPrefManager sharedPrefManager1;
     Context mContext;
     BaseApiService mApiService;
     EditText nama, alamat, phone, desc, lat, lng;
@@ -68,14 +67,14 @@ public class InputActivity extends AppCompatActivity {
     RadioGroup rglibur;
     RadioButton ya, tidak;
     Button simpan, openPhoto, bttampilMaps;
-    ImageView Ivphoto;
+    ImageView Ivphoto, Ivphotosrc;
     Integer userid;
     String libur;
     String location;
     String status = "0";
     Bitmap bitmap;
     String vnama;
-    private AwesomeValidation awesomeValidation;
+
 
     public static final int IMG_REQUEST = 777;
 
@@ -121,6 +120,7 @@ public class InputActivity extends AppCompatActivity {
         backButton2 = (ImageView) findViewById(R.id.backbutton2);
         openPhoto = (Button) findViewById(R.id.openCamera);
         Ivphoto = (ImageView) findViewById(R.id.photo);
+        Ivphotosrc = (ImageView) findViewById(R.id.photosrc);
         lat = (EditText) findViewById(R.id.LatLaundry);
         lng = (EditText) findViewById(R.id.LngLaundry);
         tvLatLaundry = (TextView) findViewById(R.id.ketLat);
@@ -131,6 +131,8 @@ public class InputActivity extends AppCompatActivity {
         hpinput = (TextInputLayout) findViewById(R.id.inputHp);
         latinput = (TextInputLayout) findViewById(R.id.inputlat);
         lnginput = (TextInputLayout) findViewById(R.id.inputlng);
+
+        Ivphoto.setVisibility(View.INVISIBLE);
 
         //awesomeValidation= new AwesomeValidation(ValidationStyle.BASIC);
         //awesomeValidation.addValidation(this, R.id.namaLaundry, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
@@ -304,6 +306,7 @@ public class InputActivity extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
                 Ivphoto.setImageBitmap(bitmap);
                 Ivphoto.setVisibility(View.VISIBLE);
+                Ivphotosrc.setVisibility(View.INVISIBLE);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -312,6 +315,7 @@ public class InputActivity extends AppCompatActivity {
             bitmap = (Bitmap) data.getExtras().get("data");
             Ivphoto.setImageBitmap(bitmap);
             Ivphoto.setVisibility(View.VISIBLE);
+            Ivphotosrc.setVisibility(View.INVISIBLE);
 
         }
     }
@@ -398,14 +402,17 @@ public class InputActivity extends AppCompatActivity {
             input.setError("Masukkan nama");
         } else if (desc.length() == 0) {
             descinput.setError("Masukkan deskripsi");
+        } else if (phone.length() == 0) {
+            hpinput.setError("Masukkan nomor handphone");
         } else if (alamat.length() == 0) {
             alamatinput.setError("Masukkan alamat");
-        } else if (phone.length() == 0) {
-            hpinput.setError("Masukkan Nomor Handphone");
         } else if (lat.length() == 0 && lng.length() == 0) {
             latinput.setError("Tekan Tombol Ubah Lokasi");
             lnginput.setError("Tekan Tombol Ubah Lokasi");
-        } else {
+        } else if(Ivphoto.getDrawable() == null) {
+            Toast.makeText(getApplicationContext(), "Tambahkan Foto Laundry", Toast.LENGTH_SHORT).show();
+        }
+        else {
             loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
             requestSimpan();
         }

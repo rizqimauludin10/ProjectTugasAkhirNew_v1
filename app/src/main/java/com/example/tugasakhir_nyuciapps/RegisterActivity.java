@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -44,10 +47,12 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog loading;
 
     String level = "0";
+    String phone = "62";
 
 
     Context mContext;
     BaseApiService mApiService;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +98,32 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
 
-                requestRegister();
+                if (etUserRegis.getText().toString().isEmpty() && etPassRegis.getText().toString().isEmpty() && etPhoneRegis.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Masukkan alamat email, password dan nomor handphone", Toast.LENGTH_SHORT).show();
+                } else if(etUserRegis.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Masukkan alamat email", Toast.LENGTH_SHORT).show();
+                } else if(etPassRegis.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Masukkan password", Toast.LENGTH_SHORT).show();
+                } else if(etPhoneRegis.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Masukkan nomor handphone", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (Patterns.EMAIL_ADDRESS.matcher(etUserRegis.getText().toString().trim()).matches()) {
+                        loading = ProgressDialog.show(mContext, null, "Harap Tunggu....", true, false);
+                        requestRegister();
+                    } else if (etPassRegis.getText().toString().length()<6 && !isValidPassword(etPassRegis.getText().toString())){
+                        Toast.makeText(getApplicationContext(), "Password tidak sesuai format", Toast.LENGTH_SHORT).show();
+                    } else if (!etUserRegis.getText().toString().trim().matches(emailPattern)){
+                        Toast.makeText(getApplicationContext(), "Email tidak sesuai format", Toast.LENGTH_SHORT).show();
+                    } else if (etPhoneRegis.getText().toString().length()>=13) {
+                        Toast.makeText(getApplicationContext(), "Nomor Handphone tidak sesuai format", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
+
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -117,11 +143,20 @@ public class RegisterActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    public static boolean isValidPassword(final String password) {
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
     private void requestRegister() {
         mApiService.registerRequest(
                 etUserRegis.getText().toString(),
                 etPassRegis.getText().toString(),
-                etPhoneRegis.getText().toString(),
+                phone + etPhoneRegis.getText().toString(),
                 level
         )
                 .enqueue(new Callback<ResponseBody>() {
