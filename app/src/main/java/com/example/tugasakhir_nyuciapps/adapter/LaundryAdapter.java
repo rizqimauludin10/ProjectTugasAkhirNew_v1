@@ -37,7 +37,7 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryH
     String status;
     Integer tglmerah;
     String date1, date2;
-    String path = "http://192.168.43.93:8000/images/";
+    String path = "https://laundry.rumahkite.co.id/images/";
 
 
     public LaundryAdapter(Context context, List<Value> laundryList) {

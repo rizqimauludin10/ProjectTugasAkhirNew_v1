@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Main2Activity.class));
                 finish();
-
             }
         });
 
@@ -111,7 +110,6 @@ public class MainActivity extends AppCompatActivity
         //Internet Connection Check
         internetCheck = new InternetCheck(this);
         if (!internetCheck.isConnected(MainActivity.this)) {
-
             internetCheck.buildDialog(MainActivity.this).show();
         } else {
 
@@ -131,7 +129,6 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             username = extras.getString("name");
@@ -146,10 +143,7 @@ public class MainActivity extends AppCompatActivity
         prphone.setText(phone);
 
         hideMenu();
-
     }
-
-
 
 
     @Override

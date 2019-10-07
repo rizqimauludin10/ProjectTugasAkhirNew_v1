@@ -81,7 +81,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public static final String jamTutup = "nyucischedule_close_hours";
     public static final String cuciBiasa = "nyuciservice_pricethree";
 
-    private String url = "http://192.168.43.93:8000/api/laundry";
+    private String url = "https://laundry.rumahkite.co.id/api/laundry";
     String tag_json_obj = "json_obj_req";
     String name, phone, alamat, foto;
     Integer id;

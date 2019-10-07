@@ -19,19 +19,19 @@ import retrofit2.http.Part;
 public interface BaseApiService {
 
     @FormUrlEncoded
-    @POST("auth/login/")
+    @POST("auth/login")
     Call<ResponseBody> loginRequest(@Field("email") String email,
                                     @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("auth/register/")
+    @POST("auth/register")
     Call<ResponseBody> registerRequest(@Field("email") String email,
                                        @Field("password") String password,
                                        @Field("phone") String phone,
                                        @Field("level") String level);
 
     @FormUrlEncoded
-    @POST("laundry/")
+    @POST("laundry")
     Call<ResponseBody> inputLaundryProfile(
             @Field("laundry_userid") Integer laundry_userid,
             @Field("laundry_locationid") String laundry_locationid,
@@ -50,7 +50,7 @@ public interface BaseApiService {
     Call<LaundryDataResponse> getLaundry();
 
     @FormUrlEncoded
-    @POST("sch/")
+    @POST("sch")
     Call<ResponseBody> jadwal(
             @Field("nyucischedule_laundryid") Integer nyucischedule_laundryid,
             @Field("nyucischedule_day") String nyucischedule_day,
@@ -60,7 +60,7 @@ public interface BaseApiService {
     );
 
     @FormUrlEncoded
-    @POST("service/")
+    @POST("service")
     Call<ResponseBody> service(
             @Field("nyuciservice_laundryid") Integer nyuciservice_laundryid,
             @Field("nyuciservice_price_one") String nyuciservice_price_one,

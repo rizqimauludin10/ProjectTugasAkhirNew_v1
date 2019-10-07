@@ -95,10 +95,6 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
                         });
                     }
                 }, 1000);
-
-
-
-
             }
         });
     }
@@ -120,8 +116,6 @@ public class PlacePickerMapsActivity extends FragmentActivity implements OnMapRe
                         lng = addressList.get(0).getLongitude();
                         if (!locality.isEmpty() && !country.isEmpty())
                             resutText.setText(locality + "  " + country);
-
-
                     }
 
                 } catch (IOException e) {

@@ -29,7 +29,7 @@ public class DetailActivity extends AppCompatActivity {
     Button hubungiPemilik;
     Button cs_btnTidak, cs_btnYa, btncsLogin;
     ImageView closeBtn, closeBtnLogin;
-    String path = "http://192.168.43.93:8000/images/";
+    String path = "https://laundry.rumahkite.co.id/images/";
     SharedPrefManager sharedPrefManager;
     Dialog epicDialog;
 
